@@ -1,0 +1,60 @@
+.g-button {
+    max-width: 320px;
+    display: flex;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .6s ease;
+}
+
+.g-button svg {
+    height: 24px;
+}
+
+g-button:hover {
+    transform: scale(1.02);
+}
+
+
+.card-right {
+    min-width: 275px;
+}
+
+.img {
+    width: 100%;
+    min-width: 400px;
+    max-width: 500px;
+}
+
+.hr {
+    border: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    margin: auto;
+}
+
+.card-left {
+    display: flex;
+    justify-content: center;
+
+}
+
+.btn-alink {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+@media screen and (max-width: 700px) {
+    .card-left {
+        display: none !important;
+    }
+}

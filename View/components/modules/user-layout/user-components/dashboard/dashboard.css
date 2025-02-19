@@ -1,0 +1,39 @@
+h2 {
+    /* margin-top: 100px; */
+    height: 100%;
+    /* background-color: red; */
+    /* margin-left: 50px; */
+
+    color: rgba(255, 255, 255, .9);
+
+}
+
+.dashboard-bg {
+    height: 100vh;
+    overflow: auto;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, .2);
+}
+
+.popup-bg {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .2);
+    display: none;
+}
+
+.popup {
+    margin-top: 50px;
+    height: 80vh;
+}
+
+.popup i {
+    top: 0;
+    position: sticky;
+}
