@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+require '../Model/db.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -11,12 +12,42 @@ function generate_jwt($payload) {
     return JWT::encode($payload, $secret_key, 'HS256');
 }
 
-function verify_jwt($token) {
+function token_validate() {
     global $secret_key;
+    $token = getBearerToken();
+    if (!$token) {
+        echo json_encode(["error" => "Token not provided"]);
+        return false;
+    }
+    
     try {
-        return JWT::decode($token, new Key($secret_key, 'HS256'));
+        $decoded = JWT::decode($token, new Key($secret_key, 'HS256'));
+        return $decoded;
+       // echo json_encode(["message" => "Token is valid", "user" => $decoded]);
     } catch (Exception $e) {
+        echo json_encode(["error" => "Invalid token: " . $e->getMessage()]);
         return false;
     }
 }
+
+function getBearerToken() {
+    $headers = getallheaders();
+    
+    if (isset($headers['Authorization'])) {
+        $matches = [];
+        if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
+            return $matches[1];
+        }
+    }
+    return null;
+}
+
+function getUserFronToken($email) {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+    return $user;
+}
+
+
 ?>
