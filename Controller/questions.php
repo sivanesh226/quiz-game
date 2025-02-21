@@ -2,40 +2,66 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-
+//$email=token_validate();
+//if($email) {
 $action = $_GET['action'] ?? '';
 
-    if ($action == 'view') {
-        $data = json_decode(file_get_contents("php://input"), true);
-        // Fetch all questions with category & subcategory
-        $category_id = $data['category_id'] ?? '';
-        $subcategory_id = $data['subcategory_id'] ?? '';
+elseif ($action == 'view') {
+    $category_id = $_GET['category_id'] ?? '';
+    $subcategory_id = $_GET['subcategory_id'] ?? '';
 
-        if (!empty($category_id) && !empty($subcategory_id)) {
-            // Fetch 10 random questions from the selected category and subcategory
-            $stmt = $pdo->prepare("
-                SELECT q.id, q.category_id, c.category_name, q.subcategory_id, s.sub_category_name, 
-                    q.question_text, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_option,
-                    q.created_author, q.updated_author
-                FROM questions q
-                INNER JOIN category c ON q.category_id = c.id
-                INNER JOIN subcategory s ON q.subcategory_id = s.id
-                WHERE q.category_id = ? AND q.subcategory_id = ? AND q.delFlag = 0
-                ORDER BY RAND()
-                LIMIT 10
-            ");
-            $stmt->execute([$category_id, $subcategory_id]);
-            $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($category_id) && !empty($subcategory_id)) {
+        // Fetch 10 random questions from the selected category and subcategory
+        $stmt = $pdo->prepare("
+            SELECT q.id, q.category_id, c.category_name, q.subcategory_id, s.sub_category_name, 
+                   q.question_text, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_option,
+                   q.created_author, q.updated_author
+            FROM questions q
+            INNER JOIN category c ON q.category_id = c.id
+            INNER JOIN subcategory s ON q.subcategory_id = s.id
+            WHERE q.category_id = ? AND q.subcategory_id = ? AND q.delFlag = 0
+            ORDER BY RAND()
+            LIMIT 10
+        ");
+        $stmt->execute([$category_id, $subcategory_id]);
+        $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (!empty($questions)) {
-                echo json_encode(["questions" => $questions], JSON_PRETTY_PRINT);
-            } else {
-                echo json_encode(["message" => "No questions found"]);
+        if (!empty($questions)) {
+            // Format the questions into the required JSON structure
+            $formatted_questions = [];
+            foreach ($questions as $q) {
+                $formatted_questions[] = [
+                    "id" => $q["id"],
+                    "question_text" => $q["question_text"],
+                    "options" => [
+                        ["option_name" => "A", "option_value" => $q["option_a"]],
+                        ["option_name" => "B", "option_value" => $q["option_b"]],
+                        ["option_name" => "C", "option_value" => $q["option_c"]],
+                        ["option_name" => "D", "option_value" => $q["option_d"]]
+                    ],
+                    "correct_option" => $q["correct_option"],
+                    "created_author" => $q["created_author"],
+                    "updated_author" => $q["updated_author"]
+                ];
             }
+
+            $response = [
+                "category_id" => $category_id,
+                "category_name" => $questions[0]["category_name"] ?? "",
+                "subcategory_id" => $subcategory_id,
+                "sub_category_name" => $questions[0]["sub_category_name"] ?? "",
+                "questions" => $formatted_questions
+            ];
+
+            echo json_encode($response, JSON_PRETTY_PRINT);
         } else {
-            echo json_encode(["error" => "category_id and subcategory_id are required"]);
+            echo json_encode(["message" => "No questions found"]);
         }
+    } else {
+        echo json_encode(["error" => "category_id and subcategory_id are required"]);
     }
+}
+
 
     elseif ($action == 'insert') {
         // Insert new question
@@ -114,5 +140,5 @@ $action = $_GET['action'] ?? '';
         echo json_encode(["error" => "Invalid action"]);
     }
 
-
+//}
 ?>
