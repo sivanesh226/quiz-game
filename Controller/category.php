@@ -46,7 +46,7 @@ require 'jwt_helper.php';
             }
         }
     
-        echo json_encode(["categories" => array_values($categories)], JSON_PRETTY_PRINT);
+        echo json_encode(['status'=> true, 'result'=> array_values($categories)], JSON_PRETTY_PRINT);
     }
     
     elseif ($action == 'insert_category') {
@@ -58,9 +58,9 @@ require 'jwt_helper.php';
         if (!empty($category_name)) {
             $stmt = $pdo->prepare("INSERT INTO category (category_name, created_author, updated_author) VALUES (?, ?, ?)");
             $stmt->execute([$category_name, $userInfo['name'], '']);
-            echo json_encode(["message" => "Category inserted successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Category inserted successfully"]);
         } else {
-            echo json_encode(["error" => "Category name is required"]);
+            echo json_encode(['status'=> false, 'message'=> "Category name is required"]);
         }
     }
     
@@ -74,9 +74,9 @@ require 'jwt_helper.php';
         if (!empty($category_id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("INSERT INTO subcategory (category_id, sub_category_name, created_author, updated_author) VALUES (?, ?, ?, ?)");
             $stmt->execute([$category_id, $sub_category_name, $userInfo['name'], '']);
-            echo json_encode(["message" => "Subcategory inserted successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Subcategory inserted successfully"]);
         } else {
-            echo json_encode(["error" => "Category ID and subcategory name are required"]);
+            echo json_encode(['status'=> false, 'message'=> "Category ID and subcategory name are required"]);
         }
     }
     
@@ -90,9 +90,9 @@ require 'jwt_helper.php';
         if (!empty($id) && !empty($category_name)) {
             $stmt = $pdo->prepare("UPDATE category SET category_name = ?, updated_author = ? WHERE id = ?");
             $stmt->execute([$category_name, $userInfo['name'], $id]);
-            echo json_encode(["message" => "Category updated successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Category updated successfully"]);
         } else {
-            echo json_encode(["error" => "ID and category name are required"]);
+            echo json_encode(['status'=> false, 'message'=> "ID and category name are required"]);
         }
     }
     
@@ -106,9 +106,9 @@ require 'jwt_helper.php';
         if (!empty($id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("UPDATE subcategory SET sub_category_name = ?, updated_author = ? WHERE id = ?");
             $stmt->execute([$sub_category_name, $userInfo['name'], $id]);
-            echo json_encode(["message" => "Subcategory updated successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Subcategory updated successfully"]);
         } else {
-            echo json_encode(["error" => "ID and subcategory name are required"]);
+            echo json_encode(['status'=> false, 'message'=> "ID and subcategory name are required"]);
         }
     }
     
@@ -120,9 +120,9 @@ require 'jwt_helper.php';
         if (!empty($id)) {
             $stmt = $pdo->prepare("UPDATE category SET isActive = 0 WHERE id = ?");
             $stmt->execute(['$id']);
-            echo json_encode(["message" => "Category deleted successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Category deleted successfully"]);
         } else {
-            echo json_encode(["error" => "ID is required"]);
+            echo json_encode(['status'=> false, 'message'=> "ID is required"]);
         }
     }
     
@@ -134,14 +134,14 @@ require 'jwt_helper.php';
         if (!empty($id)) {
             $stmt = $pdo->prepare("UPDATE subcategory SET isActive = 0 WHERE id = ?");
             $stmt->execute([$id]);
-            echo json_encode(["message" => "Subcategory deleted successfully"]);
+            echo json_encode(['status'=> true, 'result'=> "Subcategory deleted successfully"]);
         } else {
-            echo json_encode(["error" => "ID is required"]);
+            echo json_encode(['status'=> false, 'message'=> "ID is required"]);
         }
     }
     
     else {
-        echo json_encode(["error" => "Invalid action"]);
+        echo json_encode(['status'=> false, 'message'=> "Invalid action"]);
     }
 
 
