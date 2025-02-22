@@ -6,6 +6,8 @@ require 'jwt_helper.php';
 //if($email) {
     $action = $_GET['action'] ?? '';
     if ($action == 'store_result') { 
+        // Read JSON Data from Request
+        $data = json_decode(file_get_contents("php://input"), true);
         // Validate Required Fields
         $required_fields = ['user_id', 'category_id', 'subcategory_id', 'no_attempt_questions', 'no_right_answer', 'no_wrong_answer', 'total_marks', 'result_status', 'time_duration'];
 
