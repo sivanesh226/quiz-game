@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 03:28 PM
+-- Generation Time: Feb 22, 2025 at 09:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -89,6 +89,34 @@ INSERT INTO `questions` (`id`, `category_id`, `subcategory_id`, `question_text`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `results`
+--
+
+CREATE TABLE `results` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `subcategory_id` int(11) NOT NULL,
+  `no_attempt_quest` int(11) NOT NULL DEFAULT 0,
+  `no_right_answer` int(11) NOT NULL DEFAULT 0,
+  `no_wrong_answer` int(11) NOT NULL DEFAULT 0,
+  `total_marks` int(11) NOT NULL DEFAULT 0,
+  `result_status` varchar(50) NOT NULL,
+  `time_duration` time NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `user_id`, `category_id`, `subcategory_id`, `no_attempt_quest`, `no_right_answer`, `no_wrong_answer`, `total_marks`, `result_status`, `time_duration`, `created_at`) VALUES
+(1, 1, 1, 1, 5, 3, 2, 70, 'Pass', '00:01:25', '2025-02-22 19:39:46'),
+(2, 1, 1, 1, 5, 4, 1, 80, 'Pass', '01:30:00', '2025-02-22 19:53:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subcategory`
 --
 
@@ -158,6 +186,15 @@ ALTER TABLE `questions`
   ADD KEY `subcategory_id` (`subcategory_id`);
 
 --
+-- Indexes for table `results`
+--
+ALTER TABLE `results`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_results_user` (`user_id`),
+  ADD KEY `fk_results_category` (`category_id`),
+  ADD KEY `fk_results_subcategory` (`subcategory_id`);
+
+--
 -- Indexes for table `subcategory`
 --
 ALTER TABLE `subcategory`
@@ -187,6 +224,12 @@ ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT for table `results`
+--
+ALTER TABLE `results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
@@ -208,6 +251,14 @@ ALTER TABLE `users`
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategory` (`id`);
+
+--
+-- Constraints for table `results`
+--
+ALTER TABLE `results`
+  ADD CONSTRAINT `fk_results_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_results_subcategory` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategory` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_results_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `subcategory`
