@@ -43,10 +43,10 @@ if(isset($userInfo['email'])){
         // $role = strpos($email, '@admin.com') !== false ? 'Admin' : 'User';
         $stmt = $pdo->prepare("INSERT INTO users (name,email) VALUES (?, ?)");
         $stmt->execute([$name,$email]);
-        echo json_encode(['status'=> true, 'result'=> [ 'token' => $token, 'name' => $user['name'], 'email' => $user['email'], 'role'=>'user'] ]);
+        echo json_encode(['status'=> true, 'result'=> [ 'token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>'user'] ]);
 
     } else {
-        echo json_encode(['status'=> true, 'result'=> [  'token' => $token, 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);
+        echo json_encode(['status'=> true, 'result'=> [  'token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);
 
     }
 }
