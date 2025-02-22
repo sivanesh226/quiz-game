@@ -7,8 +7,8 @@ require 'jwt_helper.php';
 $action = $_GET['action'] ?? '';
 
     if ($action == 'view_question') {
-        $category_id = 1;
-        $subcategory_id = 1;
+        $category_id = $_GET['category_id'] ?? '';
+        $subcategory_id = 1$_GET['subcategory_id'] ?? '';
 
         if (!empty($category_id) && !empty($subcategory_id)) {
             // Fetch 10 random questions from the selected category and subcategory
