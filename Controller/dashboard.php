@@ -46,13 +46,12 @@ require 'jwt_helper.php';
 
         // Fetch top-scored category (highest total marks)
         $stmt = $pdo->prepare("
-            SELECT c.category_name, s.sub_category_name
+            SELECT DISTINCT c.category_name, s.sub_category_name
             FROM results r
             INNER JOIN category c ON r.category_id = c.id
             INNER JOIN subcategory s ON r.subcategory_id = s.id
             WHERE r.user_id = ?
-            ORDER BY r.total_marks DESC, r.created_at DESC
-            LIMIT 1
+            ORDER BY r.total_marks DESC, r.created_at DESC   
         ");
         $stmt->execute([$user_id]);
         $top_scored_category = $stmt->fetchAll(PDO::FETCH_ASSOC);
