@@ -12,7 +12,7 @@ $user = $stmt->fetch();
 if ($user) {
     // password_verify($password, $user['password'])
     $token = generate_jwt(['email' => $email, ]);
-    echo json_encode(['status'=> true, 'result'=> [  'token' => $token, 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);;
+    echo json_encode(['status'=> true, 'result'=> [  'token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);
 } else {
     echo json_encode(['error' => 'Invalid credentials']);
 }
