@@ -7,8 +7,8 @@ require 'jwt_helper.php';
 $action = $_GET['action'] ?? '';
 
     if ($action == 'view_question') {
-        $category_id = $_GET['category_id'] ?? '';
-        $subcategory_id = $_GET['subcategory_id'] ?? '';
+        $category_id = 1;
+        $subcategory_id = 1;
 
         if (!empty($category_id) && !empty($subcategory_id)) {
             // Fetch 10 random questions from the selected category and subcategory
@@ -45,15 +45,16 @@ $action = $_GET['action'] ?? '';
                     ];
                 }
 
-                $response = [
-                    "category_id" => $category_id,
-                    "category_name" => $questions[0]["category_name"] ?? "",
-                    "subcategory_id" => $subcategory_id,
-                    "sub_category_name" => $questions[0]["sub_category_name"] ?? "",
-                    "questions" => $formatted_questions
-                ];
+                // Corrected JSON structure
+            $response = [               
+                        "category_id" => $category_id,
+                        "category_name" => $questions[0]["category_name"] ?? "",
+                        "sub_category_id" => $subcategory_id,
+                        "sub_category_name" => $questions[0]["sub_category_name"] ?? "",
+                        "questions" => $formatted_questions
+                    ];
 
-                echo json_encode(['status'=> true, 'result'=> array_values($response)], JSON_PRETTY_PRINT);
+                echo json_encode(['status'=> true, 'result'=> $response], JSON_PRETTY_PRINT);
             } else {
                 echo json_encode(['status'=> false, 'message'=> "No questions found"]);
             }
