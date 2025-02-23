@@ -87,7 +87,7 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $data['id'] ?? '';
         $category_name = $data['category_name'] ?? '';
-        $userInfo = getUserFronToken($email]);
+        $userInfo = getUserFronToken($email);
         //$userInfo['name'] = 'Admin';
     
         if (!empty($id) && !empty($category_name)) {
