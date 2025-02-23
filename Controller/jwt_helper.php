@@ -22,7 +22,7 @@ function token_validate() {
     
     try {
         $decoded = JWT::decode($token, new Key($secret_key, 'HS256'));
-        return json_encode($decoded);
+        return (array) $decoded;
        // echo json_encode(["message" => "Token is valid", "user" => $decoded]);
     } catch (Exception $e) {
         echo json_encode(["error" => "Invalid token: " . $e->getMessage()]);

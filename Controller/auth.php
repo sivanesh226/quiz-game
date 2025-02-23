@@ -19,14 +19,14 @@ if ($action == 'login') {
         echo json_encode(['error' => 'Invalid credentials']);
     }
 } elseif ($action == 'auto_login') {
-    $email=token_validate();
+    $decoded_token = token_validate();
     
-    if($email) {
-        echo "we".$email;
+    if ($decoded_token && isset($decoded_token['email'])) {
+        $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
+        $token = getBearerToken(); //  Fetch token from headers
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?" );
         $stmt->execute([$email]);
-        $user = $stmt->fetch();
-        echo $user;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
             echo json_encode(['status'=> true, 'result'=> ['token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);
         } else {
