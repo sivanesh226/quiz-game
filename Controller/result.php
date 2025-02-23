@@ -11,8 +11,10 @@ require 'jwt_helper.php';
         // Validate Required Fields
         $required_fields = ['user_id', 'category_id', 'subcategory_id', 'no_attempt_questions', 'no_right_answer', 'no_wrong_answer', 'total_marks', 'result_status', 'time_duration'];
 
+        $zero_allowed_fields = ['no_attempt_questions', 'no_right_answer', 'no_wrong_answer', 'total_marks'];
+
         foreach ($required_fields as $field) {
-            if (!isset($data[$field]) || empty($data[$field])) {
+            if (!isset($data[$field]) || ($data[$field] === '' && !in_array($field, $zero_allowed_fields))) {
                 die(json_encode(["status" => false, "message" => "Missing or empty field: $field"]));
             }
         }
