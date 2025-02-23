@@ -6,12 +6,13 @@ export class authentication {
         this.notify = new notification
         this.googleOauth = new googleOauth
         this.googleOauth.signInWithGoogle()
+
     }
     login() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        fetch('Controller/auth.php', {
+        fetch('Controller/auth.php?action=login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })

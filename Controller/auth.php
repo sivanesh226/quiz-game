@@ -20,10 +20,13 @@ if ($action == 'login') {
     }
 } elseif ($action == 'auto_login') {
     $email=token_validate();
+    
     if($email) {
+        echo "we".$email;
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?" );
         $stmt->execute([$email]);
         $user = $stmt->fetch();
+        echo $user;
         if ($user) {
             echo json_encode(['status'=> true, 'result'=> ['token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>$user['role']] ]);
         } else {
