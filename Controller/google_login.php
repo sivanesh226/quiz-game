@@ -33,16 +33,23 @@ else{
 if(isset($userInfo['email'])){
     $email = $userInfo['email'];
     $name = array_key_exists('name',$userInfo)?  $userInfo['name'] :  $userInfo['sub'];
-    
+
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
     $token = generate_jwt(['email' => $email]);
-    
+
     if (!$user) {
         // $role = strpos($email, '@admin.com') !== false ? 'Admin' : 'User';
         $stmt = $pdo->prepare("INSERT INTO users (name,email) VALUES (?, ?)");
+        
         $stmt->execute([$name,$email]);
+
+        $stmt1 = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt1->execute([$email]);
+        $user = $stmt1->fetch();
+
+
         echo json_encode(['status'=> true, 'result'=> [ 'token' => $token, 'user_id' => $user['id'], 'name' => $user['name'], 'email' => $user['email'], 'role'=>'user'] ]);
 
     } else {

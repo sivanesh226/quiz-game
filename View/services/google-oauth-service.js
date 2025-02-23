@@ -30,7 +30,7 @@ export class googleOauth {
 
         let params = {
             client_id: this.clientId,
-            scope: 'openid email',
+            scope: 'openid email profile',
             ux_mode: 'redirect',
             redirect_uri: 'http://localhost:80/quiz-game/login',
             response_type: 'token',

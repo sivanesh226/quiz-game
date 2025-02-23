@@ -15,8 +15,18 @@
             </div>
         </div>
         <div class="right-content" id="right-content">
-            <div class="top-nav">
+            <div class="top-nav d-flex justify-content-between">
                 <div class="menu-btn" onclick="adminLayout.toggleLeftNavBar()"><i class="bi bi-list i"></i></div>
+                <div class="px-3 d-flex align-items-center" onclick="adminLayout.toggleMenu()"
+                    onblur="adminLayout.toggleMenu()">
+                    <div class="profile-img"></div>
+                    <div class="user-name ps-2" id="user-name"></div>
+                    <div class="menu-pop p-2" id="menu">
+                        <div class="btn p-2 col-12 menu-btn"><i class="bi bi-person-lines-fill"></i> Profile</div>
+                        <div class="btn p-2 col-12 menu-btn" onclick="adminLayout.logout()"><i
+                                class="bi bi-box-arrow-left pe-2"></i>Logout</div>
+                    </div>
+                </div>
             </div>
             <div id="admin-outlet"></div>
         </div>

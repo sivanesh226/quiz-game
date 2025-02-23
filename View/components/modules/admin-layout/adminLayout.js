@@ -27,6 +27,8 @@ export class adminLayout {
         navActive.appendChild(fragment);
     }
     init() {
+        document.getElementById('user-name').innerText = window.storage.getSessionData().name
+        this.toggleMenu()
         this.toggleLeftNavBar()
         this.subPageRedirect()
         this.setMenuList()
@@ -81,5 +83,15 @@ export class adminLayout {
         }
         // }, 100)
 
+    }
+    menuToggle = true
+    toggleMenu() {
+        this.menuToggle = !this.menuToggle
+        document.getElementById('menu').style.display = this.menuToggle ? 'inline-block' : 'none';
+    }
+    logout() {
+        window.storage.removeSession();
+        // window.router.navigate('/login')
+        window.location.reload()
     }
 }

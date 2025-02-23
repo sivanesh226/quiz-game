@@ -15,8 +15,19 @@
             </div>
         </div> -->
         <div class="right-content" id="right-content">
-            <div class="top-nav">
+            <div class="top-nav d-flex justify-content-between">
                 <img class="app-logo" src="./assets/img/app-logo.png">
+
+                <div class="px-3 d-flex align-items-center" onclick="userLayout.toggleMenu()"
+                    onblur="userLayout.toggleMenu()">
+                    <div class="profile-img"></div>
+                    <div class="user-name ps-2" id="user-name"></div>
+                    <div class="menu-pop p-2" id="menu">
+                        <div class="btn p-2 col-12 menu-btn"><i class="bi bi-person-lines-fill"></i> Profile</div>
+                        <div class="btn p-2 col-12 menu-btn" onclick="userLayout.logout()"><i
+                                class="bi bi-box-arrow-left pe-2"></i>Logout</div>
+                    </div>
+                </div>
             </div>
             <div id="user-outlet"></div>
         </div>

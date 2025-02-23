@@ -45,3 +45,12 @@
     color: rgba(0, 0, 0, .5);
     font-size: 14px;
 }
+
+.exam-popup {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: calc(100vh - 60px)
+}
+
+.finished-popup {}

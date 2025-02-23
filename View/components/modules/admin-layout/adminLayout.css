@@ -5,13 +5,13 @@
     height: 100vh;
     width: 250px;
     padding: 15px;
-    transition: all .7s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 .right-content {
     height: 100vh;
     width: calc(100% - 250px);
-    transition: all 0.8s;
+    transition: all 0.5s ease-in-out;
 }
 
 .nav-container {
@@ -107,6 +107,7 @@ label {
     align-items: center;
     z-index: 10;
     background-color: var(--color-primary);
+    padding-left: 20px;
 }
 
 .menu-btn .i {
@@ -121,4 +122,47 @@ label {
     height: calc(100vh - 60px);
     /* overflow: hidden; */
     /* background-color: aqua; */
+}
+
+
+.profile-img {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 100%;
+    background-image: url(https://cdn-icons-png.flaticon.com/512/9187/9187604.png);
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.user-name {
+    color: white;
+    width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.menu-pop {
+    display: none;
+    position: absolute;
+    width: 140px;
+    background-color: white;
+    top: 60px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .4);
+    color: rgba(0, 0, 0, .7);
+    cursor: pointer;
+}
+
+.menu-btn {
+    text-align: left;
+}
+
+.menu-btn:hover {
+    background-color: var(--color-secondary);
 }

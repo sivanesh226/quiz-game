@@ -76,7 +76,7 @@ export class quiz {
             if (duration <= 0) {
                 clearInterval(this.timerInterval);
                 alert("Time is up! Submitting the exam.");
-                // Trigger exam submission logic here
+                this.finishExam()
             }
 
             duration--; // Decrease time
@@ -205,23 +205,21 @@ export class quiz {
 
         }
         console.log(payload)
-        // fetch(`Controller/result.php?action=store_result`, {
-        //     method: 'GET',
-        //     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
-        //     body: JSON.stringify(payload)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.status) {
-        //             // this.questionsData = data.result
-        //             // console.log(this.questionsData)
-        //             // this.setQuestions()
-        //             this.notify.showNotification('Quiz Finished', "success")
+        fetch(`Controller/result.php?action=store_result`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
+            body: JSON.stringify(payload)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status) {
 
-        //         } else {
-        //             this.notify.showNotification(data.message, "danger")
-        //         }
-        //     });
+                    this.notify.showNotification('Quiz Finished', "success")
+
+                } else {
+                    this.notify.showNotification(data.message, "danger")
+                }
+            });
 
     }
 }

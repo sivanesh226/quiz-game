@@ -20,4 +20,14 @@ export class storage {
     getSessionData() {
         return this.userData
     }
+    removeSession() {
+        this.userData = {
+            user_id: '',
+            token: '',
+            name: '',
+            email: '',
+            role: '',
+        }
+        localStorage.removeItem('app-token');
+    }
 }

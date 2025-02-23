@@ -12,27 +12,27 @@ import { category } from './View/components/modules/admin-layout/admin-component
 import { quiz } from './View/components/modules/user-layout/user-components/quiz/quiz.js'
 
 export const routes = [
-    { path: '/', navigateTo: '/login' },
+    { path: '/', navigateTo: '/login', canActive: () => true },
     { path: '/login', componentPath: './View/components/authentication/authentication', loadClass: () => new authentication(notification, googleOauth), canActive: () => true },
     { path: '/register', componentPath: './View/components/signup/signup', loadClass: () => new signup(notification, googleOauth), canActive: () => true },
     // { path: '/dashboard', componentPath: './View/components/dashboard/dashboard', loadClass: () => new dashboard() },
     {
         path: '/admin', componentPath: './View/components/modules/admin-layout/adminLayout', loadClass: () => new adminLayout(), canActive: () => window.authGuard.isAuthenticated(),
         childrens: (() => [
-            { path: '/', navigateTo: '/dashboard' },
-            { path: '/dashboard', componentPath: './View/components/modules/admin-layout/admin-components/dashboard/dashboard', loadClass: () => new adminDashboard(), canActive: () => true },
-            { path: '/profiles', componentPath: './View/components/modules/admin-layout/admin-components/profile/profile', loadClass: () => new profile(), canActive: () => true },
-            { path: '/manage-exams', componentPath: './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams', loadClass: () => new manageExams(), canActive: () => true },
-            { path: '/manage-category', componentPath: './View/components/modules/admin-layout/admin-components/category/category', loadClass: () => new category(notification), canActive: () => true },
-            { path: '**', componentPath: './View/components/error404/error404', loadClass: () => false, canActive: () => true }
+            { path: '/', navigateTo: '/dashboard', canActive: () => true },
+            { path: '/dashboard', componentPath: './View/components/modules/admin-layout/admin-components/dashboard/dashboard', loadClass: () => new adminDashboard(), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/profiles', componentPath: './View/components/modules/admin-layout/admin-components/profile/profile', loadClass: () => new profile(), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/manage-exams', componentPath: './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams', loadClass: () => new manageExams(), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/manage-category', componentPath: './View/components/modules/admin-layout/admin-components/category/category', loadClass: () => new category(notification), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '**', componentPath: './View/components/error404/error404', loadClass: () => false, canActive: () => window.authGuard.isAuthenticated() }
         ])
     },
     {
         path: '/user', componentPath: './View/components/modules/user-layout/userLayout', loadClass: () => new userLayout(), canActive: () => window.authGuard.isAuthenticated(),
         childrens: (() => [
-            { path: '/', navigateTo: '/dashboard' },
-            { path: '/dashboard', componentPath: './View/components/modules/user-layout/user-components/dashboard/dashboard', loadClass: () => new userDashboard(), canActive: () => true },
-            { path: '/quiz', componentPath: './View/components/modules/user-layout/user-components/quiz/quiz', loadClass: () => new quiz(notification), canActive: () => true }
+            { path: '/', navigateTo: '/dashboard', canActive: () => true },
+            { path: '/dashboard', componentPath: './View/components/modules/user-layout/user-components/dashboard/dashboard', loadClass: () => new userDashboard(), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/quiz', componentPath: './View/components/modules/user-layout/user-components/quiz/quiz', loadClass: () => new quiz(notification), canActive: () => window.authGuard.isAuthenticated() }
         ])
     },
     { path: '**', componentPath: './View/components/error404/error404', loadClass: () => false, canActive: () => true }

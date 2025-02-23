@@ -115,7 +115,7 @@ export class userDashboard {
 
             // Create Subcategory List
             const ul = document.createElement("ul");
-            ul.style.display = "none"; // Initially Hidden
+            ul.style.display = "flex"; // Initially Hidden
 
             category.subcategories.forEach((sub) => {
                 const li = document.createElement("li");
