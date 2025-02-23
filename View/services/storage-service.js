@@ -1,5 +1,6 @@
 export class storage {
     userData = {
+        user_id: '',
         token: '',
         name: '',
         email: '',

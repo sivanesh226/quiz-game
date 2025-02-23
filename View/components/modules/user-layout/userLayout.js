@@ -1,5 +1,12 @@
 export class userLayout {
     constructor() {
-        window.router.navigate('/dashboard')
+        this.subPageRedirect()
+    }
+    subPageRedirect() {
+        let splittedPath = location.pathname.split('/')
+        if (splittedPath[splittedPath.length - 1] == 'user') {
+            window.router.navigate('/')
+        }
+
     }
 }

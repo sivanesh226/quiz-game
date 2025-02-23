@@ -24,16 +24,59 @@ h2 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, .2);
+    /* background-color: rgba(0, 0, 0, .2); */
     display: none;
 }
 
 .popup {
     margin-top: 50px;
     height: 80vh;
+    box-shadow: 0 0 60px rgba(0, 0, 0, .6);
 }
 
-.popup i {
+.close-icon {
     top: 0;
     position: sticky;
+    color: var(--color-danger);
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.category-heading {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    user-select: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 40px;
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+li {
+    padding: 8px 30px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 20px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+li:hover {
+    transform: scale(1.2);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+label {
+    font-size: 16px;
 }

@@ -49,25 +49,34 @@ export class router {
     }
 
     setPage(route, pathType) {
-        if (route) {
+        if (route && (!route.hasOwnProperty('navigateTo'))) {
+            if (route && route.canActive()) {
+                if (route.childrens) {
+                    this.currentParentPath += route.path; // Store parent path for child navigation
+                }
+                let moduleName = this.currentParentPath.substring(this.currentParentPath.lastIndexOf('/') + 1)
+                console.log(location.origin + this.basePath + route.componentPath + ".html")
+                fetch(location.origin + this.basePath + route.componentPath + ".html")
+                    .then(response => response.text())
+                    .then(html => {
+                        this.updateCSS(location.origin + this.basePath + route.componentPath + ".css", pathType, moduleName);
 
-            if (route.childrens) {
-                this.currentParentPath += route.path; // Store parent path for child navigation
+                        document.getElementById(pathType == 'root' ? "main-outlet" : moduleName + "-outlet").innerHTML = html;
+                        let obj = route.loadClass();
+                        window[obj.constructor.name] = obj;
+
+                        // this.loadChildRoute(route.childrens(), childPath);
+                    });
             }
-            let moduleName = this.currentParentPath.substring(this.currentParentPath.lastIndexOf('/') + 1)
-            console.log(location.origin + this.basePath + route.componentPath + ".html")
-            fetch(location.origin + this.basePath + route.componentPath + ".html")
-                .then(response => response.text())
-                .then(html => {
-                    this.updateCSS(location.origin + this.basePath + route.componentPath + ".css", pathType, moduleName);
-
-                    document.getElementById(pathType == 'root' ? "main-outlet" : moduleName + "-outlet").innerHTML = html;
-                    let obj = route.loadClass();
-                    window[obj.constructor.name] = obj;
-                    // this.loadChildRoute(route.childrens(), childPath);
-                });
-            // }
+            else {
+                this.navigate('/login')
+            }
         }
+        else {
+            this.navigate(route.navigateTo)
+        }
+        // }
+
     }
 
     updateCSS(cssFile, pathType, moduleName) {

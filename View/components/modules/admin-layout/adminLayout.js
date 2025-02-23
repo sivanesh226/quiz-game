@@ -4,14 +4,12 @@ export class adminLayout {
     isNavBarOpen = true;
     menuList = [
         { path: '/dashboard', menuName: "Dashboard", icon: 'bi bi-stack' },
-        { path: '/settings', menuName: 'Settings', icon: 'bi bi-gear-fill' },
+        { path: '/manage-exams', menuName: 'Manage Exams', icon: 'bi bi-gear-fill' },
+        { path: '/manage-category', menuName: 'Categories', icon: 'bi bi-gear-fill' },
         { path: '/profiles', menuName: 'Profiles', icon: 'bi bi-person-lines-fill' }
     ]
     constructor() {
-        // window['adminRouter'] = new router(routes())
-
         this.init()
-
     }
 
     setMenuList() {
@@ -23,19 +21,27 @@ export class adminLayout {
                 this.navigateTo(menu.path, index)
             }
             menuBtn.className = `nav-btn`;
-            menuBtn.innerHTML = `<i class="${menu.icon}"></i><label> ${menu.menuName}</label>`;
+            menuBtn.innerHTML = `<i class="${menu.icon} icon"></i><label> ${menu.menuName}</label>`;
             fragment.appendChild(menuBtn);
         });
         navActive.appendChild(fragment);
     }
     init() {
         this.toggleLeftNavBar()
-        window.router.navigate('/dashboard')
+        this.subPageRedirect()
         this.setMenuList()
         setTimeout(() => {
             this.setMenuListActive(-1)
-
         }, 1000)
+
+    }
+    subPageRedirect() {
+        let splittedPath = location.pathname.split('/')
+        if (splittedPath[splittedPath.length - 1] == 'admin') {
+            window.router.navigate('/')
+        }
+
+        // window.router.navigate('/dashboard')
 
     }
     toggleLeftNavBar() {

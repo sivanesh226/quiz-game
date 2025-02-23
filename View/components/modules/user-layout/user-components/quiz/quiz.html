@@ -1,0 +1,70 @@
+<div class="d-flex h-100">
+    <div class="exam-container ps-3 py-3">
+        <div class="card h-100 p-3" style="border-radius: 20px;">
+
+            <div class="d-flex justify-content-between exam-header"
+                style="border-bottom: 1px solid rgba(0, 0, 0, .1); height: 80px;">
+                <div class="d-flex align-items-start flex-column">
+                    <label style="font-size: 20px; color:rgba(0, 0, 0, .7); font-weight: 500;">Master
+                        Category</label>
+                    <label style="font-size: 17px; color:rgba(0, 0, 0, .5); font-weight: 500;">Sub Category</label>
+                </div>
+                <div class="d-flex align-items-center flex-column">
+                    <label style="font-size: 15px; color: rgba(0, 0, 0, .5);"> Exam Duration: 1 hour </label>
+                    <label class="text-success" id="time-left"> 01:00:00 </label>
+                </div>
+            </div>
+            <div class="p-2 question-container d-flex" id="question-container">
+                <div class="d-flex" class="question-section" id="question-section">
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center exam-footer">
+                <div class="">
+                    <button style="background-color: var(--color-secondary);" class="btn "
+                        onclick="quiz.next('backward')"><i class="bi bi-arrow-left"></i>Previous</button>
+                    <button style="background-color: var(--color-secondary);" class="btn  ps-3"
+                        onclick="quiz.next('forward')">Next <i class="bi bi-arrow-right"></i></button>
+                </div>
+                <div class="">
+                    <button class="btn btn-primary" onclick="quiz.finishExam()">Finish Exam</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="option-container px-3 py-3">
+        <div class="card h-100 p-3" style="border-radius: 20px;">
+            <div class="" style="height: calc(100% - 40px);">
+                <label>Legend:</label>
+                <div class="p-2">
+                    <div class="d-flex align-items-center">
+                        <div class="legend-color bg-success"></div>&nbsp;<label class="legend-label">
+                            Answered</label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="legend-color bg-danger"></div>&nbsp;<label class="legend-label"> Not
+                            Answered</label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="legend-color bg-warning"></div>&nbsp;<label class="legend-label"> Current
+                            Question</label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="legend-color"
+                            style="background-color: var(--color-secondary);border: 1px solid rgba(0, 0, 0, .1);"></div>
+                        &nbsp;
+                        <label class="legend-label"> Not Visited</label>
+                    </div>
+                </div>
+                <label>Question No:</label>
+                <div class="qn-navigation d-flex flex-wrap p-2" style="gap:20px" id="qn-navigation">
+
+                </div>
+            </div>
+            <div id="warning" class="bg-danger text-white p-2"
+                style="border-radius: 8px; font-size: 14px; height: 40px;">
+                ⚠️ Warning: Don't switch tabs!
+            </div>
+        </div>
+    </div>
+</div>

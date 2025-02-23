@@ -53,7 +53,8 @@ require 'jwt_helper.php';
         // Insert new category
         $data = json_decode(file_get_contents("php://input"), true);
         $category_name = $data['category_name'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        // $userInfo = getUserFronToken($email['email']);
+        $userInfo['name'] = 'Admin';
     
         if (!empty($category_name)) {
             $stmt = $pdo->prepare("INSERT INTO category (category_name, created_author, updated_author) VALUES (?, ?, ?)");
@@ -69,7 +70,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $category_id = $data['category_id'] ?? '';
         $sub_category_name = $data['sub_category_name'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        // $userInfo = getUserFronToken($email['email']);
+        $userInfo['name'] = 'Admin';
     
         if (!empty($category_id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("INSERT INTO subcategory (category_id, sub_category_name, created_author, updated_author) VALUES (?, ?, ?, ?)");
@@ -85,7 +87,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $data['id'] ?? '';
         $category_name = $data['category_name'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        // $userInfo = getUserFronToken($email['email']);
+        $userInfo['name'] = 'Admin';
     
         if (!empty($id) && !empty($category_name)) {
             $stmt = $pdo->prepare("UPDATE category SET category_name = ?, updated_author = ? WHERE id = ?");
@@ -101,7 +104,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $data['id'] ?? '';
         $sub_category_name = $data['sub_category_name'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        // $userInfo = getUserFronToken($email['email']);
+        $userInfo['name'] = 'Admin';
     
         if (!empty($id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("UPDATE subcategory SET sub_category_name = ?, updated_author = ? WHERE id = ?");
@@ -119,7 +123,7 @@ require 'jwt_helper.php';
     
         if (!empty($id)) {
             $stmt = $pdo->prepare("UPDATE category SET isActive = 0 WHERE id = ?");
-            $stmt->execute(['$id']);
+            $stmt->execute([$id]);
             echo json_encode(['status'=> true, 'result'=> "Category deleted successfully"]);
         } else {
             echo json_encode(['status'=> false, 'message'=> "ID is required"]);

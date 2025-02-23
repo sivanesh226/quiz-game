@@ -32,7 +32,6 @@ function token_validate() {
 
 function getBearerToken() {
     $headers = getallheaders();
-    
     if (isset($headers['Authorization'])) {
         $matches = [];
         if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {

@@ -1,0 +1,51 @@
+.category-bg {
+    height: 100%;
+    width: 100%;
+}
+
+h2 {
+    color: rgba(255, 255, 255, .9);
+}
+
+.category-heading {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    user-select: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 40px;
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.subBtn i:hover {
+    transform: scale(1.2);
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    /* color: var(--color-white); */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, .2); */
+    cursor: pointer;
+}
+
+.subBtn {
+    padding: 8px 30px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 20px;
+    transition: .5s;
+}
+
+.addSubBtn {
+    padding: 8px 30px;
+    border: 1px dashed rgba(0, 0, 0, .2);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
