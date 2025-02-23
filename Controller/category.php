@@ -2,9 +2,9 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-//$email=token_validate();
-//if($email) {
-    
+$decoded_token = token_validate();
+if ($decoded_token && isset($decoded_token['email'])) {
+    $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
     $action = $_GET['action'] ?? '';
 
     // **VIEW CATEGORY & SUBCATEGORY LIST**
@@ -53,8 +53,8 @@ require 'jwt_helper.php';
         // Insert new category
         $data = json_decode(file_get_contents("php://input"), true);
         $category_name = $data['category_name'] ?? '';
-        // $userInfo = getUserFronToken($email['email']);
-        $userInfo['name'] = 'Admin';
+        $userInfo = getUserFronToken($email);
+        //$userInfo['name'] = 'Admin';
     
         if (!empty($category_name)) {
             $stmt = $pdo->prepare("INSERT INTO category (category_name, created_author, updated_author) VALUES (?, ?, ?)");
@@ -70,8 +70,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $category_id = $data['category_id'] ?? '';
         $sub_category_name = $data['sub_category_name'] ?? '';
-        // $userInfo = getUserFronToken($email['email']);
-        $userInfo['name'] = 'Admin';
+        $userInfo = getUserFronToken($email);
+        //$userInfo['name'] = 'Admin';
     
         if (!empty($category_id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("INSERT INTO subcategory (category_id, sub_category_name, created_author, updated_author) VALUES (?, ?, ?, ?)");
@@ -87,8 +87,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $data['id'] ?? '';
         $category_name = $data['category_name'] ?? '';
-        // $userInfo = getUserFronToken($email['email']);
-        $userInfo['name'] = 'Admin';
+        $userInfo = getUserFronToken($email]);
+        //$userInfo['name'] = 'Admin';
     
         if (!empty($id) && !empty($category_name)) {
             $stmt = $pdo->prepare("UPDATE category SET category_name = ?, updated_author = ? WHERE id = ?");
@@ -104,8 +104,8 @@ require 'jwt_helper.php';
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $data['id'] ?? '';
         $sub_category_name = $data['sub_category_name'] ?? '';
-        // $userInfo = getUserFronToken($email['email']);
-        $userInfo['name'] = 'Admin';
+        $userInfo = getUserFronToken($email);
+        //$userInfo['name'] = 'Admin';
     
         if (!empty($id) && !empty($sub_category_name)) {
             $stmt = $pdo->prepare("UPDATE subcategory SET sub_category_name = ?, updated_author = ? WHERE id = ?");
@@ -147,19 +147,5 @@ require 'jwt_helper.php';
     else {
         echo json_encode(['status'=> false, 'message'=> "Invalid action"]);
     }
-
-
-// if (!$user) {
-//     $userInfo = getUserFronToken($email['email']);
-//     $stmt = $pdo->prepare("INSERT INTO users (name,email, password) VALUES (?, ?,'')");
-//     $stmt->execute([$name,$email, $userInfo['name']]);
-
-//     $token = generate_jwt(['email' => $email]);
-//     echo json_encode(['status'=> true, 'result'=> [  'token' => $token, 'name' => $user['name'], 'email' => $user['email'], 'role'=>'user'] ]);
-// } else {
-//     echo json_encode(['status'=> false,'errorMsg' => 'Email Already Exist']);
-
-// }
-
-//}
+}
 ?>

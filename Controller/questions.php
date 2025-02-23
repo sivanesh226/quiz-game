@@ -2,9 +2,10 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-//$email=token_validate();
-//if($email) {
-$action = $_GET['action'] ?? '';
+$decoded_token = token_validate();
+if ($decoded_token && isset($decoded_token['email'])) {
+    $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
+    $action = $_GET['action'] ?? '';
 
     if ($action == 'view_question') {
         $category_id = $_GET['category_id'] ?? '';
@@ -75,7 +76,7 @@ $action = $_GET['action'] ?? '';
         $option_c = $data['option_c'] ?? '';
         $option_d = $data['option_d'] ?? '';
         $correct_option = $data['correct_option'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        $userInfo = getUserFronToken($email);
 
         if (!empty($category_id) && !empty($subcategory_id) && !empty($question_text) && 
             !empty($option_a) && !empty($option_b) && !empty($option_c) && !empty($option_d) && 
@@ -105,7 +106,7 @@ $action = $_GET['action'] ?? '';
         $option_c = $data['option_c'] ?? '';
         $option_d = $data['option_d'] ?? '';
         $correct_option = $data['correct_option'] ?? '';
-        $userInfo = getUserFronToken($email['email']);
+        $userInfo = getUserFronToken($email);
 
         if (!empty($id) && !empty($question_text) && !empty($option_a) && !empty($option_b) && 
             !empty($option_c) && !empty($option_d) && in_array($correct_option, ['A', 'B', 'C', 'D'])) {
@@ -141,5 +142,5 @@ $action = $_GET['action'] ?? '';
         echo json_encode(['status'=> false, 'message'=> "Invalid action"]);
     }
 
-//}
+}
 ?>

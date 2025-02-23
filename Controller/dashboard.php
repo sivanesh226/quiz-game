@@ -2,8 +2,9 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-//$email=token_validate();
-//if($email) {
+$decoded_token = token_validate();
+if ($decoded_token && isset($decoded_token['email'])) {
+    $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
     $action = $_GET['action'] ?? '';
 
     if ($action == 'dashboard') {
@@ -73,5 +74,5 @@ require 'jwt_helper.php';
         // Return JSON Response
         echo json_encode($response, JSON_PRETTY_PRINT);
     }
-//}
+}
 ?>
