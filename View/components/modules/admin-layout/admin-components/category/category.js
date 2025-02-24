@@ -4,25 +4,6 @@ export class category {
         this.notify = new notification
         this.getCategories()
     }
-
-    // categories = [
-    //     {
-    //         category_name: "General Knowledge",
-    //         isEdit: false,
-    //         isExpanded: true,
-    //         subCatagory: [
-    //             { sub_category_name: 'History', isEdit: false, subCatagoryId: 1 },
-    //             { sub_category_name: 'Money', isEdit: false, subCatagoryId: 2 },
-    //             { sub_category_name: 'Earth', isEdit: false, subCatagoryId: 3 },
-    //             { sub_category_name: 'History', isEdit: false, subCatagoryId: 1 },
-    //             { sub_category_name: 'Money', isEdit: false, subCatagoryId: 2 },
-    //             { sub_category_name: 'Earth', isEdit: false, subCatagoryId: 3 },
-    //             { sub_category_name: 'History', isEdit: false, subCatagoryId: 1 },
-    //             { sub_category_name: 'Money', isEdit: false, subCatagoryId: 2 },
-    //             { sub_category_name: 'Earth', isEdit: false, subCatagoryId: 3 }
-    //         ]
-    //     }
-    // ];
     categories = []
     originalCatagories = []
     getCategories() {
