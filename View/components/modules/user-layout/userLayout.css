@@ -54,7 +54,7 @@
 
 .user-name {
     color: white;
-    width: 120px;
+    /* width: 120px; */
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;

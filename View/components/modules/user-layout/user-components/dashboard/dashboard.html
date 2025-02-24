@@ -27,7 +27,7 @@
                                     <div class="row">
                                         <div class="col-7 p-3">
                                             <h6 class="card-title text-uppercase text-muted mb-0">Quiz Attend</h6>
-                                            <span class="h2 font-weight-bold">100</span>
+                                            <span id="quiz_attend" class="h2 font-weight-bold"></span>
                                         </div>
                                         <div class="col-5 d-flex justify-content-center">
                                             <div class="bg-info text-white rounded-circle shadow text-center"
@@ -46,7 +46,7 @@
                                     <div class="row">
                                         <div class="col-7 p-3">
                                             <h6 class="card-title text-uppercase text-muted mb-0">Passed</h6>
-                                            <span class="h2 font-weight-bold mb-0">40</span>
+                                            <span id="quiz_pass" class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-5 d-flex justify-content-center">
                                             <div class="bg-success text-white rounded-circle shadow text-center"
@@ -64,7 +64,7 @@
                                     <div class="row">
                                         <div class="col-7 p-3">
                                             <h6 class="card-title text-uppercase text-muted mb-0">Failed</h6>
-                                            <span class="h2 font-weight-bold mb-0">35</span>
+                                            <span id="quiz_fail" class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-5 d-flex justify-content-center">
                                             <div class="bg-danger text-white rounded-circle shadow text-center"
@@ -82,7 +82,7 @@
                                     <div class="row">
                                         <div class="col-7 p-3">
                                             <h6 class="card-title text-uppercase text-muted mb-0">In Completed</h6>
-                                            <span class="h2 font-weight-bold mb-0">25</span>
+                                            <span id="quiz_incomplete" class="h2 font-weight-bold mb-0"></span>
                                         </div>
                                         <div class="col-5 d-flex justify-content-center">
                                             <div class="bg-warning text-white rounded-circle shadow text-center"
@@ -97,8 +97,21 @@
                     </div>
                 </div>
                 <div class=" p-3 mb-5">
-                    <div class="card " style="height: 300px; ">
+                    <div class="card p-3">
+                        <table class="table table-hover">
+                            <thead class="bg-primary text-white">
+                              <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Sub-Category Name</th>
+                                <th scope="col">Time Duration</th>
+                                <th scope="col">Total Marks</th>
+                                <th scope="col">Result Status</th>
+                              </tr>
+                            </thead>
+                            <tbody id="exam_history_table"></tbody>
 
+                        </table>
                     </div>
 
                 </div>
@@ -109,10 +122,13 @@
 <div class="popup-bg p-3  justify-content-center align-items-center" id="popup">
     <div class="popup card col-lg-9 col-md-10 col-sm-11 col-12">
         <div class="popup-header d-flex justify-content-between p-3">
+            <div>
             <h5 style="color: rgba(0,0,0,.7);">Choose Category</h5>
+            <div style="color: rgba(0,0,0,.5);font-size: 16px;">Please choose your preferred category and sub-category for taking exam.</div>
+            </div>
             <i class="close-icon bi bi-x-lg" onclick="userDashboard.closePopup()"></i>
         </div>
-        <div class="px-3 py-0 m-0">
+        <div class="popup-header px-3 py-0 m-0">
             <div style="border-bottom: 1px solid rgba(0,0,0,.1);"></div>
         </div>
         <div class=" p-3">

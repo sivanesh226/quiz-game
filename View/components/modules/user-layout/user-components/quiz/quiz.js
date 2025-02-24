@@ -74,6 +74,7 @@ export class quiz {
 
                 } else {
                     this.notify.showNotification(data.message, "danger")
+                    window.router.navigate('/dashboard')
                 }
             });
 
@@ -98,7 +99,7 @@ export class quiz {
             let timePane = document.getElementById("time-left")
             timePane.textContent = formattedTime;
             timePane.style.color = duration <= 180 ? 'var(--color-warning)' : 'var(--color-success)'
-            duration <= 60 ? timePane.style.color = 'var(--color-danger)' : 'var(--color-success)'
+            timePane.style.color=duration <= 60 ?  'var(--color-danger)' : 'var(--color-success)'
             if (duration <= 0) {
                 clearInterval(this.timerInterval);
                 alert("Time is up! Submitting the exam.");

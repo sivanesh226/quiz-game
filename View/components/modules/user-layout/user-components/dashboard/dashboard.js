@@ -1,7 +1,38 @@
 export class userDashboard {
+    dashboardData = []
     constructor() {
-        this.prepareChart()
+        //this.prepareChart()
         this.getCategories()
+        this.getDashboardDetails()
+    }
+    getDashboardDetails() {
+        fetch(`Controller/dashboard.php?action=dashboard&user_id=${window.storage.userData.user_id}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status) {
+                    this.dashboardData = data.result;
+                    console.log(this.dashboardData);
+                    this.prepareChart();
+                    document.getElementById("quiz_attend").textContent = this.dashboardData.no_quiz_attendent;
+                    document.getElementById("quiz_pass").textContent = this.dashboardData.no_of_pass;
+                    document.getElementById("quiz_fail").textContent = this.dashboardData.no_of_fail;
+                    document.getElementById("quiz_incomplete").textContent = this.dashboardData.no_of_incomplete;
+                    let tableTemplate = ''
+                    this.dashboardData.exam_history.forEach((row,i)=>{
+                        tableTemplate += `<tr><td>${i+1}</td><td>${row.category_name}</td>
+                                        <td>${row.sub_category_name}</td><td>${row.time_duration}</td>
+                                        <td>${row.total_marks}</td><td>${row.result_status}</td></tr>`
+                    });
+                    document.getElementById("exam_history_table").innerHTML = tableTemplate;
+
+                } else {
+                    this.notify.showNotification(data.message, "danger")
+                }
+            });
+
     }
     prepareChart() {
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -27,7 +58,7 @@ export class userDashboard {
                 ],
                 datasets: [{
                     label: '',
-                    data: [40, 35, 25],
+                    data: [this.dashboardData.no_of_pass, this.dashboardData.no_of_fail, this.dashboardData.no_of_incomplete],
                     backgroundColor:
                         // [gradient1, gradient2, gradient3],
                         [

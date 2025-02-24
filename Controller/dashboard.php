@@ -2,9 +2,8 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-$decoded_token = token_validate();
-if ($decoded_token && isset($decoded_token['email'])) {
-    $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
+$email=token_validate();
+if($email) {
     $action = $_GET['action'] ?? '';
 
     if ($action == 'dashboard') {
@@ -25,7 +24,7 @@ if ($decoded_token && isset($decoded_token['email'])) {
             SELECT 
                 SUM(CASE WHEN result_status = 'Pass' THEN 1 ELSE 0 END) AS passed,
                 SUM(CASE WHEN result_status = 'Fail' THEN 1 ELSE 0 END) AS failed,
-                SUM(CASE WHEN result_status = 'Incomplete' THEN 1 ELSE 0 END) AS incomplete
+                SUM(CASE WHEN result_status = 'In-Complete' THEN 1 ELSE 0 END) AS incomplete
             FROM results
             WHERE user_id = ?
         ");

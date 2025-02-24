@@ -33,6 +33,12 @@ h2 {
     margin-top: 50px;
     height: 80vh;
     box-shadow: 0 0 60px rgba(0, 0, 0, .6);
+    overflow: auto;
+}
+.popup-header{
+    position: sticky;
+    top: 0;
+    background-color: var(--color-white);
 }
 
 .close-icon {
@@ -80,4 +86,8 @@ li:hover {
 
 label {
     font-size: 16px;
+}
+
+th td {
+    padding: 0 10px;
 }
