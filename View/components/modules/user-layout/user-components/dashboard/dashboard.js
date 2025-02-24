@@ -98,7 +98,7 @@ export class userDashboard {
     }
     setCategory() {
         const container = document.getElementById("categoryTree");
-        container.innerHTML = "";
+        if (container) container.innerHTML = "";
         this.categories.forEach(category => {
             // Create a container for heading + icon
             const headingContainer = document.createElement("div");

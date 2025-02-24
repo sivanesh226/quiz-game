@@ -1,17 +1,17 @@
 <div class="d-flex h-100">
     <div class="exam-container ps-3 py-3">
         <div class="card h-100 p-3" style="border-radius: 20px;">
-
             <div class="d-flex justify-content-between exam-header"
                 style="border-bottom: 1px solid rgba(0, 0, 0, .1); height: 80px;">
                 <div class="d-flex align-items-start flex-column">
-                    <label style="font-size: 20px; color:rgba(0, 0, 0, .7); font-weight: 500;">Master
-                        Category</label>
-                    <label style="font-size: 17px; color:rgba(0, 0, 0, .5); font-weight: 500;">Sub Category</label>
+                    <label style="font-size: 20px; color:rgba(0, 0, 0, .7); font-weight: 500;"
+                        id="category-heading"></label>
+                    <label style="font-size: 17px; color:rgba(0, 0, 0, .5); font-weight: 500;"
+                        id="sub-category-heading"></label>
                 </div>
                 <div class="d-flex align-items-center flex-column">
-                    <label style="font-size: 15px; color: rgba(0, 0, 0, .5);"> Exam Duration: 1 hour </label>
-                    <label class="text-success" id="time-left"> 01:00:00 </label>
+                    <label style="font-size: 15px; color: rgba(0, 0, 0, .5);"> Exam Duration: 5 Minutes </label>
+                    <label style="color: var(--color-success);" id="time-left"> 01:00:00 </label>
                 </div>
             </div>
             <div class="p-2 question-container d-flex" id="question-container">
@@ -21,9 +21,9 @@
             </div>
             <div class="d-flex justify-content-between align-items-center exam-footer">
                 <div class="">
-                    <button style="background-color: var(--color-secondary);" class="btn "
+                    <button style="background-color: var(--color-secondary);" class="btn" id="prev-btn"
                         onclick="quiz.next('backward')"><i class="bi bi-arrow-left"></i>Previous</button>
-                    <button style="background-color: var(--color-secondary);" class="btn  ps-3"
+                    <button style="background-color: var(--color-secondary);" class="btn  ps-3" id="nxt-btn"
                         onclick="quiz.next('forward')">Next <i class="bi bi-arrow-right"></i></button>
                 </div>
                 <div class="">
@@ -69,8 +69,28 @@
     </div>
 </div>
 
-<div class="exam-popup d-flex justify-content-center align-items-center">
-    <div class="finished-popup" id="finished-popup">
+<div class="exam-popup justify-content-center" id="exam-popup">
+    <div class="instruction-popup p-3 flex-column" id="instruction-popup">
+        <div class="p-2" style="font-size: 20px; color: rgba(0, 0, 0, .6); border-bottom: 1px solid rgba(0, 0, 0, .1);">
+            Quiz Instruction
+        </div>
+        <p id="instruction-cont" style="height: calc(100% - 120px);"></p>
+        <div style="border-top: 1px solid rgba(0, 0, 0, .1); height: 60px;"
+            class="d-flex justify-content-end align-items-center px-4">
+            <button class="btn btn-primary" onclick="quiz.startExam()">Start Exam</button>
+        </div>
+    </div>
+    <div class="finished-popup align-items-center justify-content-center flex-wrap" id="finished-popup">
+        <div class="completed-img col-12 col-lg-6 col-md-6 col-sm-12"></div>
+        <div class="d-flex justify-content-center align-items-center flex-column flex-wrap col-12 col-lg-6 col-md-6 col-sm-12 "
+            style="width:50%;">
+            <div class="d-flex">
+                <h3 class="">Score: 80 <i style="color: rgba(0, 0, 0, .5); font-size: 16px;">/ 100</i></h3>
 
+            </div><br>
+            <h3 class="text-success">QUIZ PASSED</h3>
+            <button class="btn" style="background-color: var(--color-secondary);"
+                onclick="router.navigate('/dashboard')"> Back to dashboard</button>
+        </div>
     </div>
 </div>
