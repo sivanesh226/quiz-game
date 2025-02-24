@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 09:13 PM
+-- Generation Time: Feb 23, 2025 at 07:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -165,7 +165,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `mob_no`, `password`, `role`) VALUES
 (1, 'Smart', 'smartsiva226@gmail.com', NULL, '2d31e9749fd22541a0f63c728a9832fd0e0255856cf17a792876300b', 'admin'),
 (4, '112137282236794547250', 'sivanesh@dsrt.in', NULL, NULL, 'user'),
-(5, '104135638712430956438', 'ramyamariappan101@gmail.com', NULL, NULL, 'user');
+(5, '104135638712430956438', 'ramyamariappan101@gmail.com', NULL, NULL, 'user'),
+(7, 'Admin', 'admin@admin.com', NULL, '58acb7acccce58ffa8b953b12b5a7702bd42dae441c1ad85057fa70b', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -239,7 +240,7 @@ ALTER TABLE `subcategory`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
