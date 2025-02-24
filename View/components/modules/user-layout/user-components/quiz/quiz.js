@@ -250,13 +250,29 @@ export class quiz {
                 if (data.status) {
 
                     this.notify.showNotification('Quiz Finished', "success")
-                    document.getElementById('exam-popup').style.display = 'flex'
-                    document.getElementById('finished-popup').style.display = 'flex'
+                    this.showResult(payload)
+
+
                 } else {
                     this.notify.showNotification(data.message, "danger")
                 }
             });
 
+    }
+    showResult(data) {
+        document.getElementById('exam-popup').style.display = 'flex'
+        document.getElementById('finished-popup').style.display = 'flex'
+
+        document.getElementById('score').innerHTML = 'Score : ' + data.total_marks + '<i style="color: rgba(0, 0, 0, .5); font-size: 16px;">/ 100</i>';
+        let result = document.getElementById('result-status')
+        if (data.total_marks >= 50) {
+            result.textContent = 'QUIZ PASSED'
+            result.style.color = 'var(--color-success)';
+        }
+        else {
+            result.textContent = 'QUIZ FAILED'
+            result.style.color = 'var(--color-danger)';
+        }
     }
 }
 

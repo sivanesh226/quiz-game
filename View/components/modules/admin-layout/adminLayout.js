@@ -4,8 +4,8 @@ export class adminLayout {
     isNavBarOpen = true;
     menuList = [
         { path: '/dashboard', menuName: "Dashboard", icon: 'bi bi-stack' },
-        { path: '/manage-exams', menuName: 'Manage Exams', icon: 'bi bi-gear-fill' },
-        { path: '/manage-category', menuName: 'Categories', icon: 'bi bi-gear-fill' },
+        { path: '/manage-category', menuName: 'Qn & Categories', icon: 'bi bi-bookmarks-fill' },
+        // { path: '/manage-exams', menuName: 'Manage Exams', icon: 'bi bi-clipboard2-fill' },
         { path: '/profiles', menuName: 'Profiles', icon: 'bi bi-person-lines-fill' }
     ]
     constructor() {
