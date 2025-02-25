@@ -47,7 +47,8 @@ require 'jwt_helper.php';
 
             if (!empty($data['password'])) {
                 $query = "UPDATE users SET name = ?, email = ?, role = ?, password = ? WHERE id = ?";
-                $params = [$data['user_name'], $data['email_id'], $data['role'],$data['password'], $data['user_id']];
+                $hashedPassword = hash('sha224', $data['password']);
+                $params = [$data['user_name'], $data['email_id'], $data['role'],$hashedPassword, $data['user_id']];
             }
 
             $stmt = $pdo->prepare($query);
@@ -61,7 +62,8 @@ require 'jwt_helper.php';
             } 
     
             $stmt = $pdo->prepare("INSERT INTO users (name, email, role, password) VALUES (?, ?, ?, ?");
-            $stmt->execute([$data['user_name'], $data['email_id'], $data['role'], $data['password']]);
+            $hashedPassword = hash('sha224', $data['password']);
+            $stmt->execute([$data['user_name'], $data['email_id'], $data['role'], $hashedPassword]);
     
             echo json_encode(["status" => true, "message" => "User created successfully"]);
         } else {
