@@ -13,11 +13,11 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $limit = 20;
 
     if (!empty($search_key)) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE user_name LIKE ? OR email_id LIKE ? LIMIT ?");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ? OR email LIKE ? LIMIT ?");
         $search_term = "%$search_key%";
         $stmt->execute([$search_term, $search_term, $limit]);
     } else {
-        $stmt = $pdo->prepare("SELECT id, username, email, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
         $stmt->bindParam(1, $limit, PDO::PARAM_INT);
         $stmt->execute();
     }
@@ -40,11 +40,11 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $user_id = $data['user_id'];
         $password = SHA2($data['password'],224);
         if(isset($user_id)) {
-            $query = "UPDATE users SET user_name = ?, email_id = ?, role = ? WHERE user_id = ?";
+            $query = "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?";
             $params = [$data['user_name'], $data['email_id'], $data['role'], $data['user_id']];
 
             if (!empty($data['password'])) {
-                $query = "UPDATE users SET user_name = ?, email_id = ?, role = ?, password = SHA2(".$password.",224) WHERE user_id = ?";
+                $query = "UPDATE users SET name = ?, email = ?, role = ?, password = SHA2(".$password.",224) WHERE id = ?";
                 $params = [$data['user_name'], $data['email_id'], $data['role'], $data['user_id']];
             }
 
@@ -58,7 +58,7 @@ if ($decoded_token && isset($decoded_token['email'])) {
                 echo json_encode(["status" => false, "message" => "Missing required fields"]);
             } 
     
-            $stmt = $pdo->prepare("INSERT INTO users (user_name, email_id, role, password) VALUES (?, ?, ?, SHA2(".$password.",224))");
+            $stmt = $pdo->prepare("INSERT INTO users (name, email, role, password) VALUES (?, ?, ?, SHA2(".$password.",224))");
             $stmt->execute([$data['user_name'], $data['email_id'], $data['role']]);
     
             echo json_encode(["status" => true, "message" => "User created successfully"]);

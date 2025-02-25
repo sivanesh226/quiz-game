@@ -1,6 +1,7 @@
 h2 {
     /* margin-top: 100px; */
     height: 100%;
+    width: 100%;
     /* background-color: red; */
     /* margin-left: 50px; */
 
@@ -10,7 +11,7 @@ h2 {
 
 .dashboard-bg {
     height: 100vh;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .card {
