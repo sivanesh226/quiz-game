@@ -153,9 +153,33 @@ if ($decoded_token && isset($decoded_token['email'])) {
                 $stmt = $pdo->prepare("SELECT * FROM questions WHERE id = ?");
                 $stmt->execute([$question_id]);
                 $question = $stmt->fetch(PDO::FETCH_ASSOC);
+            // // Get the last inserted question ID
+            // $question_id = $pdo->lastInsertId();
 
+            // // Fetch the inserted question details
+            // $stmt = $pdo->prepare("SELECT * FROM questions WHERE id = ?");
+            // $stmt->execute([$question_id]);
+            // $q = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // // Prepare the JSON response
+            // $response = [
+            //     "status" => true,
+            //     "result" => [
+            //         "id" => $q["id"],
+            //         "question_text" => $q["question_text"],
+            //         "options" => [
+            //             ["option_name" => "A", "option_value" => $q["option_a"]],
+            //             ["option_name" => "B", "option_value" => $q["option_b"]],
+            //             ["option_name" => "C", "option_value" => $q["option_c"]],
+            //             ["option_name" => "D", "option_value" => $q["option_d"]]
+            //         ],
+            //         "correct_option" => $q["correct_option"],
+            //         "created_author" => $q["created_author"],
+            //         "updated_author" => $q["updated_author"]
+            //     ]
+            // ];
                 
-                echo json_encode(['status'=> true, 'result'=> $question]);
+                echo json_encode(['status'=> true, 'result'=> $response]);
                     
                 }
         } else {
@@ -185,7 +209,30 @@ if ($decoded_token && isset($decoded_token['email'])) {
             ");
             $stmt->execute([$question_text, $option_a, $option_b, $option_c, $option_d, $correct_option, $userInfo['name'], $id]);
 
-        
+            // Get the last inserted question ID
+            // $question_id = $data['id'] ?? '';
+            // // Fetch the inserted question details
+            // $stmt = $pdo->prepare("SELECT * FROM questions WHERE id = ?");
+            // $stmt->execute([$question_id]);
+            // $q = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // // Prepare the JSON response
+            // $response = [
+            //     "status" => true,
+            //     "result" => [
+            //         "id" => $q["id"],
+            //         "question_text" => $q["question_text"],
+            //         "options" => [
+            //             ["option_name" => "A", "option_value" => $q["option_a"]],
+            //             ["option_name" => "B", "option_value" => $q["option_b"]],
+            //             ["option_name" => "C", "option_value" => $q["option_c"]],
+            //             ["option_name" => "D", "option_value" => $q["option_d"]]
+            //         ],
+            //         "correct_option" => $q["correct_option"],
+            //         "created_author" => $q["created_author"],
+            //         "updated_author" => $q["updated_author"]
+            //     ]
+            // ];
 
             if ($id) {
                 // Fetch the inserted question details
