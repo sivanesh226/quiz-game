@@ -176,9 +176,9 @@ if ($decoded_token && isset($decoded_token['email'])) {
                     // Corrected JSON structure
                 $response = [               
                             "category_id" => $category_id,
-                            "category_name" => $questions[0]["category_name"] ?? "",
+                            "category_name" => $question[0]["category_name"] ?? "",
                             "sub_category_id" => $subcategory_id,
-                            "sub_category_name" => $questions[0]["sub_category_name"] ?? "",
+                            "sub_category_name" => $question[0]["sub_category_name"] ?? "",
                             "questions" => $formatted_questions
                         ];
 
