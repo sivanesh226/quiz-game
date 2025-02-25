@@ -40,7 +40,7 @@ require 'jwt_helper.php';
 } elseif ($action == 'admin_addUpdate_user') {
         $data = json_decode(file_get_contents("php://input"), true);
         $user_id = $data['user_id'];
-        $password = SHA2($data['password'],224);
+        $password = $data['password'];
         if(isset($user_id)) {
             $query = "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?";
             $params = [$data['user_name'], $data['email_id'], $data['role'], $data['user_id']];
