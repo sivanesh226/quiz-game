@@ -2,8 +2,8 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-$decoded_token = token_validate();
-if ($decoded_token && isset($decoded_token['email'])) {
+// $decoded_token = token_validate();
+// if ($decoded_token && isset($decoded_token['email'])) {
     $email = $decoded_token['email'] ?? null;  // Extract email from decoded token
     $action = $_GET['action'] ?? '';
 
@@ -13,9 +13,8 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $limit = 20;
 
     if (!empty($search_key)) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ? OR email LIKE ? LIMIT ?");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ? OR email LIKE ? LIMIT 20");
         $search_term = "%$search_key%";
-        $stmt->bindParam(3, $limit, PDO::PARAM_INT);
         $stmt->execute([$search_term, $search_term]);
     } else {
         $stmt = $pdo->prepare("SELECT id, name, email, role, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
@@ -76,5 +75,5 @@ if ($decoded_token && isset($decoded_token['email'])) {
 
         echo json_encode(["status" => true, "message" => "User deleted successfully"]);
     }
-}
+//}
 ?>
