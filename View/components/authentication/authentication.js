@@ -22,8 +22,14 @@ export class authentication {
                         window.authGuard.authenticatedRoutes()
 
                     }
-                });
-        }
+                })
+                .catch(err => {
+                    this.notify.showNotification('Unable to connect to the server', 'danger')
+
+                })
+
+        };
+
     }
     login() {
         const email = document.getElementById('email').value;
@@ -43,6 +49,9 @@ export class authentication {
                 } else {
                     this.notify.showNotification("Login failed ", "danger")
                 }
+            }).catch(err => {
+                this.notify.showNotification('Unable to connect to the server', 'danger')
+
             });
     }
 }

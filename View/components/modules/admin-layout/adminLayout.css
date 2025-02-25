@@ -110,7 +110,7 @@ label {
     padding-left: 20px;
 }
 
-.menu-btn .i {
+.menu-btn1 .i {
     color: white;
     font-size: 25px;
     cursor: pointer;
@@ -159,10 +159,10 @@ label {
     cursor: pointer;
 }
 
-.menu-btn {
+.menu-btn1 {
     text-align: left;
 }
 
-.menu-btn:hover {
+/* .menu-btn:hover {
     background-color: var(--color-secondary);
-}
+} */

@@ -22,7 +22,7 @@ export const routes = [
             { path: '/', navigateTo: '/dashboard', canActive: () => true },
             { path: '/dashboard', componentPath: './View/components/modules/admin-layout/admin-components/dashboard/dashboard', loadClass: () => new adminDashboard(), canActive: () => window.authGuard.isAuthenticated() },
             { path: '/profiles', componentPath: './View/components/modules/admin-layout/admin-components/profile/profile', loadClass: () => new profile(), canActive: () => window.authGuard.isAuthenticated() },
-            { path: '/manage-exams', componentPath: './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams', loadClass: () => new manageExams(), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/manage-exams', componentPath: './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams', loadClass: () => new manageExams(notification), canActive: () => window.authGuard.isAuthenticated() },
             { path: '/manage-category', componentPath: './View/components/modules/admin-layout/admin-components/category/category', loadClass: () => new category(notification), canActive: () => window.authGuard.isAuthenticated() },
             { path: '**', componentPath: './View/components/error404/error404', loadClass: () => false, canActive: () => window.authGuard.isAuthenticated() }
         ])
