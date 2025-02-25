@@ -2,8 +2,8 @@
 header('Content-Type: application/json');
 require '../Model/db.php';
 require 'jwt_helper.php';
-$email=token_validate();
-if($email) {
+$decoded_token = token_validate();
+if ($decoded_token && isset($decoded_token['email'])) {
     $action = $_GET['action'] ?? '';
 
     if ($action == 'dashboard') {

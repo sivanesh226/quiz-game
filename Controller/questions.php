@@ -145,7 +145,44 @@ if ($decoded_token && isset($decoded_token['email'])) {
             ");
             $stmt->execute([$category_id, $subcategory_id, $question_text, $option_a, $option_b, $option_c, $option_d, $correct_option, $userInfo['name'], '']);
 
-            echo json_encode(['status'=> true, 'result'=> "Question added successfully"]);
+            // Get the last inserted question ID
+            $question_id = $pdo->lastInsertId();
+
+            if ($question_id) {
+                // Fetch the inserted question details
+                $stmt = $pdo->prepare("SELECT * FROM questions WHERE id = ?");
+                $stmt->execute([$question_id]);
+                $question = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if (!empty($question)) {
+                    // Format the questions into the required JSON structure
+                    $formatted_questions = [];
+                    foreach ($question as $q) {
+                        $formatted_questions[] = [
+                            "id" => $q["id"],
+                            "question_text" => $q["question_text"],
+                            "options" => [
+                                ["option_name" => "A", "option_value" => $q["option_a"]],
+                                ["option_name" => "B", "option_value" => $q["option_b"]],
+                                ["option_name" => "C", "option_value" => $q["option_c"]],
+                                ["option_name" => "D", "option_value" => $q["option_d"]]
+                            ],
+                            "correct_option" => $q["correct_option"],
+                            "created_author" => $q["created_author"],
+                            "updated_author" => $q["updated_author"]
+                        ];
+                    }
+    
+                    // Corrected JSON structure
+                $response = [               
+                            "category_id" => $category_id,
+                            "category_name" => $questions[0]["category_name"] ?? "",
+                            "sub_category_id" => $subcategory_id,
+                            "sub_category_name" => $questions[0]["sub_category_name"] ?? "",
+                            "questions" => $formatted_questions
+                        ];
+
+                echo json_encode(['status'=> true, 'result'=> $response]);
         } else {
             echo json_encode(['status'=> false, 'error'=> "Invalid input data"]);
         }

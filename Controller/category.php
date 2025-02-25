@@ -122,9 +122,16 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $id = $data['id'] ?? '';
     
         if (!empty($id)) {
+            // Soft delete subcategories first
+            $stmt = $pdo->prepare("UPDATE subcategory SET isActive = 0 WHERE category_id = ?");
+            $stmt->execute([$id]);
+            // Soft delete the category
             $stmt = $pdo->prepare("UPDATE category SET isActive = 0 WHERE id = ?");
             $stmt->execute([$id]);
-            echo json_encode(['status'=> true, 'result'=> "Category deleted successfully"]);
+            // Soft delete the category
+            $stmt = $pdo->prepare("UPDATE questions SET isActive = 0 WHERE category_id = ?");
+            $stmt->execute([$id]);
+            echo json_encode(['status'=> true, 'result'=> "Category and Sub-Category deleted successfully"]);
         } else {
             echo json_encode(['status'=> false, 'message'=> "ID is required"]);
         }
