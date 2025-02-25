@@ -27,8 +27,10 @@ require 'jwt_helper.php';
     if ($users) {
         // Convert 'has_password' to boolean and rename to 'password'
         foreach ($users as &$user) {
-            $user['password'] = (bool) $user['has_password']; // Convert to true/false
-            unset($user['has_password']); // Remove the temporary field
+            if(isset($user['has_password'])) {
+                $user['password'] = (bool) $user['has_password']; // Convert to true/false
+                unset($user['has_password']); // Remove the temporary field
+            }
         }
         echo json_encode(["status" => true, "result" => $users]);
     } else {
