@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2025 at 07:26 PM
+-- Generation Time: Feb 25, 2025 at 09:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,10 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `category_name`, `created_author`, `updated_author`, `created_dateTime`, `updated_dateTime`, `isActive`) VALUES
 (1, 'History', 'Admin', 'Admin', '2025-02-20 22:54:35', '2025-02-20 22:56:55', 1),
 (2, 'General Knowledge', 'Admin', 'Admin', '2025-02-20 22:54:35', '2025-02-20 22:57:07', 1),
-(3, 'Sports', 'Admin', '', '2025-02-21 13:50:42', '2025-02-21 13:57:14', 0);
+(3, 'Sports', 'Admin', '', '2025-02-21 13:50:42', '2025-02-25 23:40:35', 0),
+(4, 'sdfsdfsd', 'Admin', '', '2025-02-24 21:44:52', '2025-02-25 23:40:36', 0),
+(5, 'asdfasd', 'Admin', '', '2025-02-24 21:45:27', '2025-02-25 23:41:39', 0),
+(6, 'sdfgsdfgsdf', 'Admin', '', '2025-02-24 21:46:00', '2025-02-25 23:41:54', 0);
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,15 @@ CREATE TABLE `results` (
 
 INSERT INTO `results` (`id`, `user_id`, `category_id`, `subcategory_id`, `no_attempt_quest`, `no_right_answer`, `no_wrong_answer`, `total_marks`, `result_status`, `time_duration`, `created_at`) VALUES
 (1, 1, 1, 1, 5, 3, 2, 70, 'Pass', '00:01:25', '2025-02-22 19:39:46'),
-(2, 1, 1, 1, 5, 4, 1, 80, 'Pass', '01:30:00', '2025-02-22 19:53:21');
+(2, 1, 1, 1, 5, 4, 1, 80, 'Pass', '01:30:00', '2025-02-22 19:53:21'),
+(3, 8, 1, 2, 0, 0, 0, 0, 'Fail', '00:04:57', '2025-02-24 14:19:26'),
+(4, 8, 1, 2, 1, 1, 0, 20, 'Fail', '00:04:47', '2025-02-24 14:20:34'),
+(5, 8, 1, 1, 1, 0, 1, 0, 'Fail', '00:04:58', '2025-02-24 15:54:52'),
+(6, 8, 1, 1, 4, 1, 3, 20, 'Fail', '00:04:17', '2025-02-24 15:56:05'),
+(7, 8, 1, 2, 4, 1, 3, 20, 'Fail', '00:00:00', '2025-02-24 16:41:32'),
+(8, 8, 1, 2, 0, 0, 0, 0, 'In-Complete', '00:04:53', '2025-02-24 16:45:03'),
+(9, 8, 1, 1, 5, 5, 0, 100, 'Pass', '00:04:21', '2025-02-24 16:58:31'),
+(10, 8, 1, 1, 5, 5, 0, 100, 'Pass', '00:04:27', '2025-02-24 17:04:20');
 
 -- --------------------------------------------------------
 
@@ -141,7 +152,14 @@ INSERT INTO `subcategory` (`id`, `category_id`, `sub_category_name`, `created_au
 (3, 1, 'World War History', 'Admin', 'Admin', '2025-02-20 22:59:05', '2025-02-20 22:59:05', 1),
 (4, 2, 'Current Affairs', 'Admin', 'Admin', '2025-02-20 22:59:05', '2025-02-20 22:59:05', 1),
 (5, 2, 'Famous Personalities', 'Admin', 'Admin', '2025-02-20 22:59:05', '2025-02-20 22:59:05', 1),
-(6, 2, 'Important Events', 'Admin', 'Admin', '2025-02-20 22:59:05', '2025-02-20 22:59:05', 1);
+(6, 2, 'Important Events', 'Admin', 'Admin', '2025-02-20 22:59:05', '2025-02-20 22:59:05', 1),
+(7, 4, 'sfgsdfg', 'Admin', '', '2025-02-24 21:45:11', '2025-02-25 23:40:36', 0),
+(8, 4, 'asdfsadfsad', 'Admin', '', '2025-02-24 21:45:16', '2025-02-25 23:40:36', 0),
+(9, 5, 'sdfasdf', 'Admin', '', '2025-02-24 21:45:38', '2025-02-25 23:41:39', 0),
+(10, 5, 'asdfsdfgsd', 'Admin', '', '2025-02-24 21:45:43', '2025-02-25 23:41:39', 0),
+(11, 5, 'wedgefge', 'Admin', '', '2025-02-24 21:45:48', '2025-02-25 23:41:39', 0),
+(12, 6, 'sdgsd', 'Admin', '', '2025-02-24 21:47:28', '2025-02-25 23:41:54', 0),
+(13, 6, 'asdfsdfasd', 'Admin', '', '2025-02-24 21:47:32', '2025-02-25 23:41:54', 0);
 
 -- --------------------------------------------------------
 
@@ -155,18 +173,19 @@ CREATE TABLE `users` (
   `email` varchar(45) NOT NULL,
   `mob_no` int(11) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
-  `role` varchar(45) NOT NULL DEFAULT 'user'
+  `role` varchar(45) NOT NULL DEFAULT 'user',
+  `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `mob_no`, `password`, `role`) VALUES
-(1, 'Smart', 'smartsiva226@gmail.com', NULL, '2d31e9749fd22541a0f63c728a9832fd0e0255856cf17a792876300b', 'admin'),
-(4, '112137282236794547250', 'sivanesh@dsrt.in', NULL, NULL, 'user'),
-(5, '104135638712430956438', 'ramyamariappan101@gmail.com', NULL, NULL, 'user'),
-(7, 'Admin', 'admin@admin.com', NULL, '58acb7acccce58ffa8b953b12b5a7702bd42dae441c1ad85057fa70b', 'admin');
+INSERT INTO `users` (`id`, `name`, `email`, `mob_no`, `password`, `role`, `isActive`) VALUES
+(1, 'Smart', 'smartsiva226@gmail.com', NULL, '2d31e9749fd22541a0f63c728a9832fd0e0255856cf17a792876300b', 'admin', 1),
+(4, '112137282236794547250', 'sivanesh@dsrt.in', NULL, NULL, 'user', 1),
+(7, 'Admin', 'admin@admin.com', NULL, '58acb7acccce58ffa8b953b12b5a7702bd42dae441c1ad85057fa70b', 'admin', 1),
+(8, 'Ramya Mariappan', 'ramyamariappan101@gmail.com', NULL, NULL, 'user', 1);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +235,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -228,19 +247,19 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
