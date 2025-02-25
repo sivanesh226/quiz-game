@@ -179,7 +179,7 @@ if ($decoded_token && isset($decoded_token['email'])) {
             //     ]
             // ];
                 
-                echo json_encode(['status'=> true, 'result'=> $response]);
+                echo json_encode(['status'=> true, 'result'=> $question]);
                     
                 }
         } else {
