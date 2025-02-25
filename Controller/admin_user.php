@@ -17,7 +17,7 @@ if ($decoded_token && isset($decoded_token['email'])) {
         $search_term = "%$search_key%";
         $stmt->execute([$search_term, $search_term, $limit]);
     } else {
-        $stmt = $pdo->prepare("SELECT id, name, email, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, role, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
         $stmt->bindParam(1, $limit, PDO::PARAM_INT);
         $stmt->execute();
     }
