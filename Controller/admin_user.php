@@ -15,10 +15,12 @@ if ($decoded_token && isset($decoded_token['email'])) {
     if (!empty($search_key)) {
         $stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ? OR email LIKE ? LIMIT ?");
         $search_term = "%$search_key%";
-        $stmt->execute([$search_term, $search_term, $limit]);
+        $stmt->bindParam(1, $limit, PDO::PARAM_INT);
+        $stmt->execute([$search_term, $search_term]);
     } else {
         $stmt = $pdo->prepare("SELECT id, name, email, role, (password IS NOT NULL AND password != '') AS has_password FROM users LIMIT ?");
-        $stmt->execute([$limit]);
+        $stmt->bindParam(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
