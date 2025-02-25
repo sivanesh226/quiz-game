@@ -6,7 +6,8 @@ export class adminLayout {
         { path: '/dashboard', menuName: "Dashboard", icon: 'bi bi-stack' },
         { path: '/manage-category', menuName: 'Categories', icon: 'bi bi-bookmarks-fill' },
         { path: '/manage-exams', menuName: 'Questions', icon: 'bi bi-clipboard2-fill' },
-        { path: '/profiles', menuName: 'Profiles', icon: 'bi bi-person-lines-fill' }
+        { path: '/manage-users', menuName: 'Manage Users', icon: 'bi bi-person-lines-fill' },
+        // { path: '/profiles', menuName: 'Profiles', icon: 'bi bi-person-lines-fill' } 
     ]
     constructor() {
         this.init()

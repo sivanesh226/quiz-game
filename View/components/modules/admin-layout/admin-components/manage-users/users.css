@@ -1,0 +1,14 @@
+.users-bg {
+    height: 100%;
+    width: 100%;
+}
+
+h2 {
+    color: rgba(255, 255, 255, .9);
+}
+
+#add-user-pane {
+    max-height: 500px;
+    overflow: hidden;
+    transition: all .8s;
+}

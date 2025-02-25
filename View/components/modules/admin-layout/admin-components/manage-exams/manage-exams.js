@@ -14,6 +14,8 @@ export class manageExams {
         subCategory.addEventListener('change', (event) => {
             this.subCategoryId = event.target.value;
             document.getElementById('question-section').innerHTML = '';
+            this.displayData = {}
+            this.questionsData = {}
             this.getQuestions()
         });
     }
@@ -27,6 +29,7 @@ export class manageExams {
                 if (data.status) {
                     this.categories = data.result
                     console.log(this.categories)
+
                     // this.notify.showNotification("Login Successfully ", "success")s
                     this.categoryId = this.categories[0].id
                     this.subCategoryId = this.categories[0].subcategories[0].id
@@ -58,6 +61,8 @@ export class manageExams {
             const selectedCategory = this.categories.find(mcat => mcat.id == this.categoryId);
             this.subCategoryId = selectedCategory.subcategories[0].id
             this.setSubCategory(selectedCategory);
+            this.displayData = {}
+            this.questionsData = {}
             this.getQuestions()
             document.getElementById('question-section').innerHTML = ''
         });

@@ -10,6 +10,7 @@ import { userDashboard } from './View/components/modules/user-layout/user-compon
 import { manageExams } from './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams.js'
 import { category } from './View/components/modules/admin-layout/admin-components/category/category.js';
 import { quiz } from './View/components/modules/user-layout/user-components/quiz/quiz.js'
+import { users } from './View/components/modules/admin-layout/admin-components/manage-users/users.js';
 
 export const routes = [
     { path: '/', navigateTo: '/login', canActive: () => true },
@@ -24,6 +25,7 @@ export const routes = [
             { path: '/profiles', componentPath: './View/components/modules/admin-layout/admin-components/profile/profile', loadClass: () => new profile(), canActive: () => window.authGuard.isAuthenticated() },
             { path: '/manage-exams', componentPath: './View/components/modules/admin-layout/admin-components/manage-exams/manage-exams', loadClass: () => new manageExams(notification), canActive: () => window.authGuard.isAuthenticated() },
             { path: '/manage-category', componentPath: './View/components/modules/admin-layout/admin-components/category/category', loadClass: () => new category(notification), canActive: () => window.authGuard.isAuthenticated() },
+            { path: '/manage-users', componentPath: './View/components/modules/admin-layout/admin-components/manage-users/users', loadClass: () => new users(notification), canActive: () => window.authGuard.isAuthenticated() },
             { path: '**', componentPath: './View/components/error404/error404', loadClass: () => false, canActive: () => window.authGuard.isAuthenticated() }
         ])
     },
