@@ -46,8 +46,8 @@ require 'jwt_helper.php';
             $params = [$data['user_name'], $data['email_id'], $data['role'], $data['user_id']];
 
             if (!empty($data['password'])) {
-                $query = "UPDATE users SET name = ?, email = ?, role = ?, password = SHA2(".$password.",224) WHERE id = ?";
-                $params = [$data['user_name'], $data['email_id'], $data['role'], $data['user_id']];
+                $query = "UPDATE users SET name = ?, email = ?, role = ?, password = ? WHERE id = ?";
+                $params = [$data['user_name'], $data['email_id'], $data['role'],$data['password'], $data['user_id']];
             }
 
             $stmt = $pdo->prepare($query);
@@ -60,8 +60,8 @@ require 'jwt_helper.php';
                 echo json_encode(["status" => false, "message" => "Missing required fields"]);
             } 
     
-            $stmt = $pdo->prepare("INSERT INTO users (name, email, role, password) VALUES (?, ?, ?, SHA2(".$password.",224))");
-            $stmt->execute([$data['user_name'], $data['email_id'], $data['role']]);
+            $stmt = $pdo->prepare("INSERT INTO users (name, email, role, password) VALUES (?, ?, ?, ?");
+            $stmt->execute([$data['user_name'], $data['email_id'], $data['role'], $data['password']]);
     
             echo json_encode(["status" => true, "message" => "User created successfully"]);
         } else {
