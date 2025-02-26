@@ -65,7 +65,6 @@ export class router {
                 this.currentParentPath += route.path; // Store parent path for child navigation
             }
             let moduleName = this.currentParentPath.substring(this.currentParentPath.lastIndexOf('/') + 1)
-            console.log(location.origin + this.basePath + route.componentPath + ".html", 'monitor the path')
             fetch(location.origin + this.basePath + route.componentPath + ".html")
                 .then(response => response.text())
                 .then(html => {

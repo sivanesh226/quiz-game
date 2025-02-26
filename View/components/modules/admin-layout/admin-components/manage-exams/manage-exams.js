@@ -28,7 +28,6 @@ export class manageExams {
             .then(data => {
                 if (data.status) {
                     this.categories = data.result
-                    console.log(this.categories)
 
                     // this.notify.showNotification("Login Successfully ", "success")s
                     this.categoryId = this.categories[0].id
@@ -47,7 +46,6 @@ export class manageExams {
 
     setCategory() {
         // let catagory = [{ mainCatagoryName: "General Knowledge", subCatagory: [{ subCatagoryName: 'History', subCatagoryId: 1 }, { subCatagoryName: 'Money', subCatagoryId: 2 }, { subCatagoryName: 'Earth', subCatagoryId: 3 }] }]
-        console.log(this.categories)
         let mCategory = document.getElementById('m-category')
         this.categories.forEach(mcat => {
             let option = document.createElement("option");
@@ -171,12 +169,9 @@ export class manageExams {
 
         this.displayData.questions[qnIndex].question_text = document.getElementById('question-textarea').value
         if (optIndex != -1) {
-            console.log(document.getElementById(`input-opt${qnIndex}${optIndex}`).value)
             this.displayData.questions[qnIndex].options[optIndex].option_value = document.getElementById(`input-opt${qnIndex}${optIndex}`).value
             this.displayData.questions[qnIndex].correct_option = this.displayData.questions[qnIndex].options[optIndex].option_name
         }
-        console.log(this.displayData, this.questionsData)
-
     }
     addNewQuestion() {
         let template = {}
@@ -209,7 +204,6 @@ export class manageExams {
             // template = { questions: [template] }
             this.displayData['questions'] = []
         }
-        console.log(template)
         this.displayData['questions'].push(template)
         this.setQuestions()
     }

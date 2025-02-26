@@ -14,7 +14,6 @@ export class userDashboard {
             .then(data => {
                 if (data.status) {
                     this.dashboardData = data.result;
-                    console.log(this.dashboardData);
                     this.prepareChart();
                     document.getElementById("quiz_attend").textContent = this.dashboardData.no_quiz_attendent;
                     document.getElementById("quiz_pass").textContent = this.dashboardData.no_of_pass;
@@ -108,7 +107,6 @@ export class userDashboard {
     // ];
     categories = []
     getCategories() {
-        console.log(window)
         fetch('Controller/category.php?action=view', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
@@ -117,7 +115,6 @@ export class userDashboard {
             .then(data => {
                 if (data.status) {
                     this.categories = data.result
-                    console.log(this.categories)
                     // this.notify.showNotification("Login Successfully ", "success")s
                     this.setCategory()
 

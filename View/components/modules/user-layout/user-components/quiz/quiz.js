@@ -53,7 +53,6 @@ export class quiz {
     setSizeOfQn() {
         setTimeout(() => {
             let questionSize = document.getElementById('question-container').getBoundingClientRect()
-            console.log(questionSize)
             let question = document.getElementsByClassName('question-set')
             for (let i = 0; i < question.length; i++) {
                 question[i].style.width = questionSize.width + 'px'
@@ -77,7 +76,6 @@ export class quiz {
             .then(data => {
                 if (data.status) {
                     this.questionsData = data.result
-                    console.log(this.questionsData)
                     this.setQuestions()
 
                 } else {
@@ -176,7 +174,6 @@ export class quiz {
     preQnIndex = 0
     qnNavigateTo(index) {
         this.currentQnIndex = index
-        console.log(this.currentQnIndex)
         document.getElementById('prev-btn').style.display = this.currentQnIndex ? 'inline-block' : 'none'
         document.getElementById('nxt-btn').style.display = this.currentQnIndex == 4 ? 'none' : 'inline-block'
 
@@ -191,7 +188,6 @@ export class quiz {
         let questionSize = document.getElementById('question-container').getBoundingClientRect()
         let qusetionPannel = document.getElementById('question-section')
         this.qnValue = questionSize.width * index
-        console.log(this.qnValue)
         qusetionPannel.style.transform = `translateX(-${this.qnValue}px)`
         qusetionPannel.style.transition = '.5s';
         this.preQnIndex = index
@@ -201,9 +197,7 @@ export class quiz {
         this.questionsData.questions[questionIndex]['isSelected'] = true;
         let selectedOption = this.questionsData.questions[questionIndex].options[optionIndex].option_name;
         let correct_option = this.questionsData.questions[questionIndex].correct_option;
-        console.log(selectedOption, correct_option, selectedOption == correct_option)
         this.questionsData.questions[questionIndex]['isCorrect'] = (selectedOption == correct_option) ? true : false;
-        console.log(this.questionsData)
         // this.qnNavigateTo(questionIndex) //just To update the color
     }
     tabChanges() {
@@ -233,7 +227,6 @@ export class quiz {
 
         document.removeEventListener("visibilitychange", this.handleVisibilityChange)
 
-        console.log(document.getElementById("time-left").textContent)
         let noRightAns = this.questionsData.questions.filter(qn => qn.isCorrect == true).length;
         let percentage = noRightAns / this.questionsData.questions.length * 100;
         let payload = {
@@ -248,7 +241,6 @@ export class quiz {
             time_duration: document.getElementById("time-left").textContent
 
         }
-        console.log(payload)
         fetch(`Controller/result.php?action=store_result`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },

@@ -11,21 +11,24 @@
             <div class="d-flex justify-content-center" id="add-user-pane">
                 <div class="col-12 col-sm-12 col-md-10 col-lg-8 row p-3">
                     <div class="col-8 px-3 pt-3">
-                        <input type="text" class="form-control" placeholder="User Name">
+                        <input type="text" class="form-control" id="u-name" placeholder="User Name">
                     </div>
                     <div class="col-4 px-3 pt-3">
-                        <select class="form-control" placeholder="Role">
+                        <select class="form-control" placeholder="Role" id="role">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>
                     </div>
                     <div class="col-6 px-3 pt-3 ">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" id="email">
                     </div>
                     <div class="col-6 px-3 pt-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" id="password">
                     </div>
-                    <button class="btn btn-primary col-auto m-3 px-3">Add User</button>
+                    <button class="btn btn-primary col-auto m-3 px-3" id="submit-btn"
+                        onclick="users.updateUserData()">Add User</button>
+                    <button class="btn col-auto my-3 px-3" style="background-color: var(--color-secondary);"
+                        onclick="users.clear()">clear</button>
                 </div>
             </div>
             <div class="mt-4 p-3" id="hide-table">
@@ -47,6 +50,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Password Status</th>
+                        <th>Options</th>
                     </tr>
                     <tbody id="table-data">
 

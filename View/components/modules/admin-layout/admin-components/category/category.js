@@ -7,7 +7,6 @@ export class category {
     categories = []
     originalCatagories = []
     getCategories() {
-        console.log(window)
         fetch('Controller/category.php?action=view', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
@@ -16,7 +15,6 @@ export class category {
             .then(data => {
                 if (data.status) {
                     this.categories = data.result
-                    console.log(this.categories)
                     // this.notify.showNotification("Login Successfully ", "success")s
                     this.setCategory()
 
@@ -184,7 +182,6 @@ export class category {
         this.setCategory()
     }
     deleteMainCategory(index) {
-        console.log(index)
     }
     updateCategory(index) {
         fetch(`Controller/category.php?action=${this.categories[index].id ? this.categories[index]?.isDeleted ? 'delete_category' : 'update_category' : 'insert_category'}`, {
@@ -210,13 +207,11 @@ export class category {
     }
     addSubCategory(index) {
         this.categories[index].subcategories.push({ sub_category_name: '', isEdit: true, id: null })
-        console.log(index, this.categories)
 
         this.setCategory()
     }
 
     updateSubCategory(index, subIndex) {
-        console.log('delete trigger')
         let subCat = this.categories[index].subcategories[subIndex]
         subCat['category_id'] = this.categories[index].id
         fetch(`Controller/category.php?action=${subCat.id ? subCat?.isDeleted ? 'delete_subcategory' : 'update_subcategory' : 'insert_subcategory'}`, {

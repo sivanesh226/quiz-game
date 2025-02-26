@@ -21,7 +21,6 @@ export class googleOauth {
                     } else {
                         this.notify.showNotification("Login failed ", "danger")
                     }
-                    console.log(data)
                 });
 
         }

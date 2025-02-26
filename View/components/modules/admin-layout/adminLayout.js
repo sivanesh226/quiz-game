@@ -63,7 +63,6 @@ export class adminLayout {
         }
     }
     navigateTo(path, index) {
-        console.log(path, index)
         this.setMenuListActive(index)
         window.router.navigate(path)
 

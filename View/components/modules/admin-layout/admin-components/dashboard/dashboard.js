@@ -13,7 +13,6 @@ export class adminDashboard {
             .then(data => {
                 if (data.status) {
                     this.dashboardData = data.result;
-                    console.log(this.dashboardData);
                     document.getElementById("no_users").textContent = this.dashboardData.no_of_user;
                     document.getElementById("no_categories").textContent = this.dashboardData.no_of_categories;
                     document.getElementById("no_subcategories").textContent = this.dashboardData.no_of_subcategories;

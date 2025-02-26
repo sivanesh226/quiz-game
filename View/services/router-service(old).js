@@ -13,7 +13,6 @@ export class router {
     //     window.onpopstate = () => this.loadPage(window.location.pathname, window.location.pathname != this.basePath + '/');
 
     //     document.addEventListener('DOMContentLoaded', () => {
-    //         console.log(window.location.pathname, this.basePath + '/', window.location.pathname === this.basePath + '/')
     //         this.loadPage(window.location.pathname, window.location.pathname != this.basePath + '/');
     //     });
     // }
@@ -22,7 +21,6 @@ export class router {
         document.addEventListener("DOMContentLoaded", () => this.loadPage(window.location.pathname));
     }
     // navigate(path, hold = false) {
-    //     console.log(window.location, path)
     //     let pathName
 
     //     if (!hold) {
@@ -31,7 +29,6 @@ export class router {
     //     }
 
     //     let finalPath = (pathName ? pathName : location.pathname)
-    //     console.log(window.location.origin + finalPath + path, hold)
     //     window.history.pushState({}, path, window.location.origin + finalPath + path);
     //     this.loadPage(path);
 
@@ -56,7 +53,6 @@ export class router {
     //     const file = this.paths.filter(row => { return basePath ? path === (this.basePath + row.path) : path === row.path });
     //     if (file.length) {
     //         let component = this.getComponentNameAndPath(file[0])
-    //         console.log(component)
     //         if (component) {
     //             this.updateCSS(component.componentPath + component.componentName + '.css') // dynamically switch css according to component
 
@@ -130,7 +126,6 @@ export class router {
     // }
 
     // loadPage(path) {
-    //     console.log("Loading path:", path);
 
     //     if (!path.startsWith(this.basePath)) {
     //         console.error("Invalid base path");
@@ -165,7 +160,6 @@ export class router {
     //     }
     // }
     loadPage(path) {
-        console.log("Loading path:", path);
 
         if (!path.startsWith(this.basePath)) {
             console.error("Invalid base path");
@@ -174,7 +168,6 @@ export class router {
 
         const relativePath = path.replace(this.basePath, "") || "/";
         let route = ''
-        console.log(relativePath, relativePath.split('/'))
         let splittedPath = relativePath.split('/')
         if (splittedPath.length <= 2) {
             route = this.findRoute(relativePath);
@@ -312,7 +305,6 @@ export class router {
     //     }
     // }
     loadChildRoute(childRoutes, childPath) {
-        console.log("Loading child route:", childPath);
 
         let cleanPath = childPath.startsWith("/") ? childPath.substring(1) : childPath; // Remove leading slash
         let childRoute = childRoutes.find(route => cleanPath === route.path.replace("/", ""));
