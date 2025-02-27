@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 09:01 PM
+-- Generation Time: Feb 27, 2025 at 02:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,7 +47,8 @@ INSERT INTO `category` (`id`, `category_name`, `created_author`, `updated_author
 (3, 'Sports', 'Admin', '', '2025-02-21 13:50:42', '2025-02-25 23:40:35', 0),
 (4, 'sdfsdfsd', 'Admin', '', '2025-02-24 21:44:52', '2025-02-25 23:40:36', 0),
 (5, 'asdfasd', 'Admin', '', '2025-02-24 21:45:27', '2025-02-25 23:41:39', 0),
-(6, 'sdfgsdfgsdf', 'Admin', '', '2025-02-24 21:46:00', '2025-02-25 23:41:54', 0);
+(6, 'sdfgsdfgsdf', 'Admin', '', '2025-02-24 21:46:00', '2025-02-25 23:41:54', 0),
+(7, 'Sports', 'Admin', '', '2025-02-26 02:13:25', '2025-02-26 02:13:25', 1);
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,8 @@ INSERT INTO `questions` (`id`, `category_id`, `subcategory_id`, `question_text`,
 (23, 1, 2, 'Who wrote the Declaration of Independence?', 'Benjamin Franklin', 'Thomas Jefferson', 'John Adams', 'Alexander Hamilton', 'B', 'Admin', 'Admin', '2025-02-21 18:13:48', '2025-02-21 18:13:48', 1),
 (24, 1, 2, 'Which country was the last to join the Allies in World War II?', 'United States', 'France', 'Soviet Union', 'Italy', 'C', 'Admin', 'Admin', '2025-02-21 18:13:48', '2025-02-21 18:13:48', 1),
 (25, 1, 2, 'What was the name of the ship that carried the Pilgrims to America in 1620?', 'Santa Maria', 'Mayflower', 'HMS Victory', 'Endeavour', 'B', 'Admin', 'Admin', '2025-02-21 18:13:48', '2025-02-21 18:13:48', 1),
-(26, 2, 2, 'Who invented Computer?', 'Charles Babbage', 'Jackie Chan', 'Alexander Grahambell', 'Mark Zuckerberg', 'A', 'Admin', 'Admin', '2025-02-21 18:54:14', '2025-02-21 18:54:14', 1);
+(26, 2, 5, 'Who invented Computer?', 'Charles Babbage', 'Jackie Chan', 'Alexander Grahambell', 'Mark Zuckerberg', 'A', 'Admin', 'Admin', '2025-02-21 18:54:14', '2025-02-25 21:18:37', 0),
+(33, 7, 14, 'In 2011, Which country won the world cup trophy?', 'India', 'SriLanka', 'England', 'Australia', 'A', 'Admin', 'Admin', '2025-02-25 20:51:03', '2025-02-25 20:51:22', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,8 @@ INSERT INTO `subcategory` (`id`, `category_id`, `sub_category_name`, `created_au
 (10, 5, 'asdfsdfgsd', 'Admin', '', '2025-02-24 21:45:43', '2025-02-25 23:41:39', 0),
 (11, 5, 'wedgefge', 'Admin', '', '2025-02-24 21:45:48', '2025-02-25 23:41:39', 0),
 (12, 6, 'sdgsd', 'Admin', '', '2025-02-24 21:47:28', '2025-02-25 23:41:54', 0),
-(13, 6, 'asdfsdfasd', 'Admin', '', '2025-02-24 21:47:32', '2025-02-25 23:41:54', 0);
+(13, 6, 'asdfsdfasd', 'Admin', '', '2025-02-24 21:47:32', '2025-02-25 23:41:54', 0),
+(14, 7, 'Cricket', 'Admin', '', '2025-02-26 02:13:34', '2025-02-26 02:13:34', 1);
 
 -- --------------------------------------------------------
 
@@ -183,9 +186,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `mob_no`, `password`, `role`, `isActive`) VALUES
 (1, 'Smart', 'smartsiva226@gmail.com', NULL, '2d31e9749fd22541a0f63c728a9832fd0e0255856cf17a792876300b', 'admin', 1),
-(4, '112137282236794547250', 'sivanesh@dsrt.in', NULL, NULL, 'user', 1),
+(4, '112137282236794547250', 'sivanesh@dsrt.in', NULL, NULL, 'user', 0),
 (7, 'Admin', 'admin@admin.com', NULL, '58acb7acccce58ffa8b953b12b5a7702bd42dae441c1ad85057fa70b', 'admin', 1),
-(8, 'Ramya Mariappan', 'ramyamariappan101@gmail.com', NULL, NULL, 'user', 1);
+(8, 'Ramya Mariappan', 'ramyamariappan101@gmail.com', NULL, NULL, 'user', 0),
+(9, 'Ramya', 'ramyarahini10@gmail.com', NULL, '$2y$10$JIeHy1ElUvuLZlf21hXlEeffNCWfnppPQf1EH.egUha/MoZThB.r.', 'user', 1),
+(10, 'Sivanesh123', 'smatsiva226@gmail.com', NULL, '$2y$10$7aph3OuS4pEcnQC4yzwJFeZXmVKOgGjfQ/5U6iaFYsKA8DAI.bwyC', 'admin', 0),
+(11, 'Sarath', 'sarath@gmail.com', NULL, '$2y$10$LAD3S.d.O9wVeWulLwz03uSYrLragvpxZmZHiwUOKx8J/mrNS76py', 'user', 0),
+(12, 'Kaanu', 'Kanu@gmail.com', NULL, '$2y$10$.F.Oa6io/3zYOGvqK.FKyOEHDTk23ynvXY5XzC6A0KflTRQ.20r/.', 'user', 0),
+(13, 'bbb', 'ccc@df.vdfd', NULL, '$2y$10$.906Ot7fozkJaPNsUwVL6OkjuPrRkrZlPV9trn4t184EOF5chqlrG', 'user', 0),
+(14, 'Rahini', 'ramyasathy@yahoo.com', NULL, '$2y$10$7yJk2cTFgffpOEfJkoVd4OxzLxnIdpzMkYGuZx4AQMsbnD9uTb9Mq', 'user', 1);
 
 --
 -- Indexes for dumped tables
@@ -235,13 +244,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `results`
@@ -253,13 +262,13 @@ ALTER TABLE `results`
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

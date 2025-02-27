@@ -37,6 +37,7 @@ export class users {
             btn.style.backgroundColor = 'var(--color-danger)';
             btn.textContent = 'Cancel';
             document.getElementById('add-user-pane').style.maxHeight = '400px'
+            // this.clear();
         }
         else {
             btn.style.backgroundColor = 'var(--color-primary)';
@@ -58,7 +59,7 @@ export class users {
             <td>
             <div class="d-flex align-items-center">
             <button class="btn" onclick="users.editUser(${i})"><i class="bi bi-pencil text-primary"></i></button>
-            <button class="btn" onclick="users.deleteUser(${i})"><i class="bi bi-trash text-danger"></i></button>
+            <button class="btn" onclick="users.deleteUserData(${i})"><i class="bi bi-trash text-danger"></i></button>
             </div>
          </tr>`
         });
@@ -111,7 +112,9 @@ export class users {
                     if (data.status) {
                         document.getElementById('submit-btn').textContent = 'Add User'
                         this.updateId = ''
-                        this.getUserDetails()
+                        this.getUserDetails("")
+                        this.clear();
+                        this.notify.showNotification(data.result, "success")
                     } else {
                         this.notify.showNotification(data.message, "danger")
                     }
@@ -124,8 +127,27 @@ export class users {
             this.notify.showNotification('Please fill all fields', 'warn')
         }
     }
-    deleteUserData() {
-
+    deleteUserData(index){
+        if(index){
+        fetch(`Controller/admin_user.php?action=admin_user_delete`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + window.storage.userData.token },
+            body: JSON.stringify({user_id:this.userData[index].id})
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status) {
+                    console.log(data)
+                    this.getUserDetails("")
+                    this.notify.showNotification(data.result, "success")
+                } else {
+                    this.notify.showNotification(data.message, "danger")
+                }
+            }).catch((err) => {
+                console.log(err)
+                this.notify.showNotification(`Error while deleting user  ${err}`, 'danger')
+            });
+        }
     }
 }
 // }[
