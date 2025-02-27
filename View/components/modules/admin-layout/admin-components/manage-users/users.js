@@ -124,8 +124,8 @@ export class users {
             this.notify.showNotification('Please fill all fields', 'warn')
         }
     }
-    deleteUserData(){
-        
+    deleteUserData() {
+
     }
 }
 // }[
